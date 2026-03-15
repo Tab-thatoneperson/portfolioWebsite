@@ -1,0 +1,268 @@
+/* body{
+    background-image: url(duck.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+}
+#clock-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+}
+#clock{
+    font-family: monospace;
+    font-size: 6.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(2, 73, 2);
+    backdrop-filter: blur(5px);
+    background-color: white;
+    width: 100%;
+} */
+/* a{
+    cursor: pointer;
+    text-decoration: None;
+}
+.JumpToTop{
+    border: 2px;
+    border-radius: 25%;
+} */
+:root{
+    --bodyColour: #E4E9F7;
+    --navColour: #4070F4;
+    --sideNav: #4070f4be;
+    --textColour: #FFF;
+    --searchBar: #F2F2F2;
+    --searchText: #010718;
+    --mainTextColour: #000000;
+}
+body{
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    background-color: var(--bodyColour);
+    font-family: Arial, Helvetica, sans-serif;
+}
+body.dark{
+    --bodyColour: #18191A;
+    --navColour: #242526;
+    --sideNav: #242526;
+    --textColour: #CCC;
+    --searchBar: #242526;
+    --mainTextColour: #CCC;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 100%;
+    background-color: var(--navColour);
+    z-index: 100;
+}
+nav .navBar{
+    position: relative;
+    height: 100%;
+    max-width: 1000px;
+    width: 100%;
+    background-color: var(--navColour);
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+nav .navBar .sideBarOpen{
+    color: var(--textColour);
+    font-size: 25px;
+    padding: 5px;
+    cursor: pointer;
+    display: none;
+}
+
+nav .navBar .logo a{
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--textColour);
+    text-decoration: none;
+}
+
+.menu .logoToggle{
+        display: none;
+    }
+
+.navBar .navLinks{
+    display: flex;
+    align-items: center;
+}
+
+.navBar .navLinks li{
+    margin: 0 5px;
+    list-style-type: none;
+}
+
+.navLinks li a{
+    position: relative;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--textColour);
+    text-decoration: none;
+    padding: 10px;
+}
+.navLinks li a::after{
+    content: '';
+    position: absolute;
+    left: 5%;
+    bottom: 5px;
+    height: 2px;
+    width: 0;
+    background-color: var(--textColour);
+    transition: width .4s;
+}
+.navLinks li:hover a::after{
+    width: 90%;
+}
+
+.navBar .darkLight-searchBox{
+    display: flex;
+    align-items: center;
+}
+.darkLight-searchBox .darkLight,
+.darkLight-searchBox .searchBox{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+}
+
+.darkLight i, 
+.searchBox i{
+    position: absolute;
+    color: var(--textColour);
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.darkLight i.sun{
+    opacity: 0;
+    pointer-events: none;
+}
+.darkLight.active i.sun{
+    opacity: 1;
+    pointer-events: auto;
+}
+.darkLight.active i.moon{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.searchBox i.cancel{
+    opacity: 0;
+    pointer-events: none;
+}
+.searchBox.active i.cancel{
+    opacity: 1;
+    pointer-events: auto;
+}
+.searchBox.active i.search{
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 790px) {
+    nav .navBar .sideBarOpen{
+        display: block;
+    }
+    .menu{
+        position: fixed;
+        height: 100%;
+        width: 160px;
+        left: -100%;
+        top: 0;
+        padding: 20px;
+        background-color: var(--sideNav);
+        z-index: 100;
+        transition: all 0.4s ease;
+    }
+    nav.active .menu{
+        left: 0;
+    }
+    nav.active .navBar .navLogo a{
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    .menu .logoToggle{
+        display: block;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logoToggle .sideBarClose{
+        color: var(--textColour);
+        font-size: 24px;
+        cursor: pointer;
+    }
+    .navBar .navLinks{
+        flex-direction: column;
+        padding-top: 30px;
+    }
+    .navLinks li a{
+        display: block;
+        margin-top: 20px;
+    }
+}
+
+.mainBody{
+    color: var(--mainTextColour);
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+}
+
+.characterCanvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    pointer-events: none;
+    display: none;
+}
+.characterCanvas.show {
+    display: inline;
+}
+
+#container {
+    background-color: greenyellow;
+    background-image: linear-gradient(green .1em, transparent .1em), 
+    linear-gradient(90deg, green, .1em, transparent .1em);
+    background-size: 4em 4em;
+    height: 100vh;
+}
+
+#card {
+    width: 400px;
+    height: 400px;
+    background-color: lightgreen;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.target{
+    background-color: purple;
+    padding: 10px;
+    position: fixed;
+}
