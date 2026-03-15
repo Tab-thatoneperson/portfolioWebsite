@@ -1,35 +1,3 @@
-/* body{
-    background-image: url(duck.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    margin: 0;
-}
-#clock-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height:100vh;
-}
-#clock{
-    font-family: monospace;
-    font-size: 6.5rem;
-    font-weight: bold;
-    text-align: center;
-    color: rgb(2, 73, 2);
-    backdrop-filter: blur(5px);
-    background-color: white;
-    width: 100%;
-} */
-/* a{
-    cursor: pointer;
-    text-decoration: None;
-}
-.JumpToTop{
-    border: 2px;
-    border-radius: 25%;
-} */
 :root{
     --bodyColour: #E4E9F7;
     --navColour: #4070F4;
@@ -222,13 +190,17 @@ nav .navBar .logo a{
         display: block;
         margin-top: 20px;
     }
+    /* --------------------------Home---------------------------- */
+    .home{
+        flex-direction: column;
+    }
 }
 
 .mainBody{
     color: var(--mainTextColour);
-    margin-top: 70px;
+    /* margin-top: 70px;
     display: flex;
-    align-items: center;
+    align-items: center; */
     z-index: 1;
     position: absolute;
 }
@@ -266,3 +238,68 @@ nav .navBar .logo a{
     padding: 10px;
     position: fixed;
 }
+
+/* --------------------------Home---------------------------- */
+section{
+    padding: 10rem 12%;
+}
+.home{
+    display: flex;
+    flex-direction: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 15rem;
+}
+.home-content{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+.home-content p{
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.8;
+}
+.social-icons a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    padding: 1rem;
+    background: transparent;
+    border: 2px solid var(--mainTextColour);
+    border-radius: 50%;
+    color: var(--mainTextColour);
+    margin: 3rem 0.5rem;
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+.social-icons a:hover{
+    color: var(--navColour);
+    background-color: var(--mainTextColour);
+    transform: scale(1.2)translateY(-5px);
+}
+/* ------------------GOOSE HINT-------------------------------- */
+.home-goose-hint img{
+    scale: 0.6;
+    filter: brightness(0);
+}
+.home-goose-hint p{
+    text-align: center;
+}
+.home-goose-hint .hidden-text{
+    display: none;
+}
+.home-goose-hint .hidden-text span{
+    color: var(--navColour);
+    font-weight: bold;
+}
+.home-goose-hint:hover .default-text{
+    display: none;
+}
+.home-goose-hint:hover .hidden-text{
+    display: block;
+}
+
+
