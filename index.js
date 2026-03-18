@@ -116,7 +116,7 @@ function updateCharacter() {
     }
 
     if (keys.w && (character.y > character.speed)) {
-        console.log(character.y)
+        // console.log(character.y)
         character.y -= character.speed;
         character.direction = "walkUp";
         character.moving = true;
@@ -232,49 +232,68 @@ addEventListener("keyup", (e) => {
 
 //====================draggable========================//
 // * inspired by Appwrite: https://www.youtube.com/watch?v=ymDjvycjgUM
-let newX = 0, newY = 0, startX = 0, startY = 0;
+// let newX = 0, newY = 0, startX = 0, startY = 0;
 
-const card = document.getElementById('card');
-card.addEventListener('mousedown', mouseDown);
+// const card = document.getElementById('card');
+// card.addEventListener('mousedown', mouseDown);
 
-function mouseDown(e) {
-    startX = e.clientX;
-    startY = e.clientY;
+// function mouseDown(e) {
+//     startX = e.clientX;
+//     startY = e.clientY;
 
-    document.addEventListener('mousemove', mouseMove);
-    document.addEventListener('mouseup', mouseUp);
-};
+//     document.addEventListener('mousemove', mouseMove);
+//     document.addEventListener('mouseup', mouseUp);
+// };
 
-function mouseMove(e) {
-    newX = startX - e.clientX;
-    newY = startY - e.clientY;
+// function mouseMove(e) {
+//     newX = startX - e.clientX;
+//     newY = startY - e.clientY;
 
-    startX = e.clientX;
-    startY = e.clientY;
+//     startX = e.clientX;
+//     startY = e.clientY;
 
-    card.style.top = (card.offsetTop - newY) + 'px';
-    card.style.left = (card.offsetLeft - newX) + 'px';
-};
+//     card.style.top = (card.offsetTop - newY) + 'px';
+//     card.style.left = (card.offsetLeft - newX) + 'px';
+// };
 
-function mouseUp(e){
-    document.removeEventListener('mousemove', mouseMove);
-};
+// function mouseUp(e){
+//     document.removeEventListener('mousemove', mouseMove);
+// };
 
-// //--------------list of movableElements positions
+//--------------list of movableElements positions
 // const moveableElements = document.querySelectorAll('.target');
 // const moveablePos = [];
 // for (let element of moveableElements) {
 //     moveablePos.append({x: element.left, y: element.top});
 // };
 
+const targetElements = document.querySelectorAll('.target');
+const targetElementsXY = new Map();
+for (let element of targetElements) {
+    targetElementsXY.set(element, [0, 0]);
+}
+console.log(targetElementsXY);
+
 function checkCollision() {
     const moveableElements = document.querySelectorAll('.target');
 
     for (let element of moveableElements) {
-        moveablePos = [element.left, element.top]; 
-        checkIntersection(character, element, moveablePos);
+        // moveablePos = [element.left, element.top]; 
+        // checkIntersection(character, element, moveablePos);
+        checkIntersection(character, element, targetElementsXY.get(element));
     };
 };
+
+//new way to get elements - should work with flex box
+// const targetElements = document.querySelectorAll('.target');
+// const targetElementsXY = Array.from(targetElements).map(element => ({
+//     element: element,
+//     x: 0,
+//     y: 0
+// }));
+
+// console.log(targetElementsXY);
+// console.log(targetElementsXY)
 
 
 function checkIntersection(goose, element, pos) {
@@ -287,7 +306,12 @@ function checkIntersection(goose, element, pos) {
             goose.x <= r2.right &&
             (goose.x + scaledWidth) >= r2.left &&
             goose.direction == "walkUp") { 
-                element.style.top = element.offsetTop - (r2.bottom - goose.y) + 'px';
+                // element.style.top = element.offsetTop - (r2.bottom - goose.y) + 'px';
+                let moveY = (r2.bottom - goose.y);
+                let posArray = targetElementsXY.get(element);
+                posArray[1] = posArray[1] - moveY;
+                element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+                console.log(posArray[1]);
             }
         //top push
         else if ((goose.y + scaledHeight) >= r2.top && 
