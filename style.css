@@ -235,8 +235,8 @@ nav .navBar .logo a{
 }
 
 .target{
-    background-color: purple;
-    display: block;
+    /* background-color: purple; */
+    display: inline-block;
     /* position: absolute; */
 }
 

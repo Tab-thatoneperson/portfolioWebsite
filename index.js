@@ -311,7 +311,7 @@ function checkIntersection(goose, element, pos) {
                 let posArray = targetElementsXY.get(element);
                 posArray[1] = posArray[1] - moveY;
                 element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
-                console.log(posArray[1]);
+                // console.log(posArray[1]);
             }
         //top push
         else if ((goose.y + scaledHeight) >= r2.top && 
@@ -319,7 +319,12 @@ function checkIntersection(goose, element, pos) {
             goose.x <= r2.right &&
             (goose.x + scaledWidth) >= r2.left &&
             goose.direction == "walkDown") {
-                element.style.top = (goose.y + scaledHeight) + 'px';
+                // element.style.top = (goose.y + scaledHeight) + 'px';
+                let posArray = targetElementsXY.get(element);
+                let moveY = (goose.y + scaledHeight) - r2.top;
+                console.log(moveY);
+                posArray[1] = posArray[1] + moveY;
+                element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
             };
         }
     // x axis
@@ -330,7 +335,11 @@ function checkIntersection(goose, element, pos) {
             goose.y + scaledHeight >= r2.top &&
             goose.y <= r2.bottom &&
             goose.direction == "walkLeft") {
-                element.style.left = element.offsetLeft - (r2.right - goose.x) + "px";
+                // element.style.left = element.offsetLeft - (r2.right - goose.x) + "px";
+                let moveX = (r2.right - goose.x);
+                let posArray = targetElementsXY.get(element);
+                posArray[0] = posArray[0] - moveX;
+                element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
             }
         //right push
         else if ((goose.x + scaledWidth) >= r2.left && 
@@ -338,7 +347,11 @@ function checkIntersection(goose, element, pos) {
             (goose.y + scaledHeight) >= r2.top &&
             goose.y <= r2.bottom &&
             goose.direction == "walkRight") {
-                element.style.left = (goose.x + scaledWidth) + 'px';                
+                // element.style.left = (goose.x + scaledWidth) + 'px';  
+                let posArray = targetElementsXY.get(element); 
+                let moveX = (goose.x + scaledWidth) - r2.left;
+                posArray[0] = posArray[0] + moveX;
+                element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;             
             };
     }
 };
