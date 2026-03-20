@@ -160,7 +160,7 @@ nav .navBar .logo a{
     opacity: 0;
     pointer-events: none;
 }
-
+/*-----------------------main body---------------------------------*/
 .mainBody{
     color: var(--mainTextColour);
     margin-top: 70px;
@@ -169,6 +169,7 @@ nav .navBar .logo a{
     z-index: 1;
     position: absolute;
     flex-direction: column;
+    width: 100vw;
 }
 
 .characterCanvas{
