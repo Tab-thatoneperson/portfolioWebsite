@@ -1,11 +1,16 @@
 :root{
     --bodyColour: #E4E9F7;
     --navColour: #4070F4;
-    --sideNav: #4070f4be;
+    --sideNav: #f57600cd;
     --textColour: #FFF;
-    --searchBar: #F2F2F2;
-    --searchText: #010718;
+    /* --searchBar: #F2F2F2;
+    --searchText: #010718; */
     --mainTextColour: #000000;
+    --darkOrange: #C44601;
+    --orange: #F57600;
+    --lightBlue: #8BABF1;
+    --blue: #0073E6;
+    --darkBlue: #054FB9;
 }
 body{
     padding: 0;
@@ -18,10 +23,15 @@ body{
 body.dark{
     --bodyColour: #18191A;
     --navColour: #242526;
-    --sideNav: #242526;
-    --textColour: #CCC;
+    --sideNav: #b34c11d8;
+    --textColour: #FFF;
     --searchBar: #242526;
     --mainTextColour: #CCC;
+    --darkOrange: #862A14;
+    --orange: #B34D11;
+    --lightBlue: #8BABF1;
+    --blue: #1770A4;
+    --darkBlue: #0B4B7A;
 }
 ul{
     margin: 0;
@@ -34,20 +44,20 @@ nav{
     left: 0;
     height: 70px;
     width: 100%;
-    background-color: var(--navColour);
+    background-color: var(--orange);
     z-index: 100;
 }
 nav .navBar{
     position: relative;
     height: 100%;
-    max-width: 1000px;
+    /* max-width: 1000px; */
     width: 100%;
-    background-color: var(--navColour);
+    background-color: var(--orange);
     margin: 0 auto;
-    padding: 0 30px;
+    /* padding: 0 30px; */
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 nav .navBar .sideBarOpen{
     color: var(--textColour);
@@ -71,6 +81,8 @@ nav .navBar .logo a{
 .navBar .navLinks{
     display: flex;
     align-items: center;
+    padding-right: 25vw;
+    padding-left: 25vw;
 }
 
 .navBar .navLinks li{
@@ -149,9 +161,184 @@ nav .navBar .logo a{
     pointer-events: none;
 }
 
+.mainBody{
+    color: var(--mainTextColour);
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    flex-direction: column;
+}
+
+.characterCanvas{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    pointer-events: none;
+    display: none;
+}
+.characterCanvas.show {
+    display: inline;
+}
+
+.target{
+    /* background-color: purple; */
+    display: inline-block;
+    /* position: absolute; */
+}
+
+/* --------------------------Home---------------------------- */
+section{
+    padding: 3rem 12%;
+}
+.home{
+    display: flex;
+    flex-direction: auto;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+}
+.home-content{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    /* align-items: center;
+    text-align: center; */
+    gap: 0;
+}
+.home-content p{
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.8;
+}
+.home-description{
+    max-width: 80%;
+}
+#welcome-typed{
+    color: red;
+    font-weight: bolder;
+    font-size: 3rem;
+    margin-right: 10px;
+}
+#name{
+    color: pink;
+    font-weight: bolder;
+    font-size: 4rem;
+}
+.social-icons a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    padding: 1rem;
+    background: transparent;
+    border: 2px solid var(--mainTextColour);
+    border-radius: 50%;
+    color: var(--mainTextColour);
+    margin: 3rem 0.5rem;
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+.social-icons a:hover{
+    color: var(--orange);
+    background-color: var(--mainTextColour);
+    transform: scale(1.2)translateY(-5px);
+}
+/* ------------------GOOSE HINT-------------------------------- */
+.home-goose-hint{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 140px;
+    margin-top: 2.5rem;
+}
+.home-goose-hint img{
+    filter: brightness(0);
+}
+.home-goose-hint p{
+    text-align: center;
+}
+.home-goose-hint .hidden-text{
+    display: none;
+}
+.home-goose-hint .hidden-text span{
+    color: var(--orange);
+    font-weight: bold;
+}
+.home-goose-hint:hover .default-text{
+    display: none;
+}
+.home-goose-hint:hover .hidden-text{
+    display: block;
+}
+/* ------------------ABOUT-------------------------------- */
+.about-container{
+    row-gap: 4rem;
+}
+.about-content{
+    display: grid;
+    row-gap: 3rem;
+    /* justify-content: center; */
+}
+.about{
+    justify-content: center;
+}
+.about-data{
+    text-align: center;
+}
+.about-subtitle{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    font-size: 30px;
+    color: var(--orange);
+    margin-bottom: 1rem;
+}
+.about-items li{
+    list-style: none;
+}
+.about-items{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+}
+.about-item{
+    background-color: var(--blue);
+    padding: .5rem .75rem;
+    border-radius: 2rem;
+    color: var(--mainTextColour);
+    font-weight: 600;
+    border: 2px solid var(--bodyColour);
+    cursor: default;
+    transition: background-color .4s, color .4s, border-color .4s;
+}
+.about-item:hover{
+    background-color: var(--bodyColour);
+    color: var(--mainTextColour);
+    border-color: var(--blue);
+}
+
+@media(max-width: 1170px){
+    .navBar .navLinks{
+        padding-right: 15vw;
+        padding-left: 15vw;
+    }
+}
+
 @media (max-width: 790px) {
+    nav .navBar{
+        padding: 0;
+    }
     nav .navBar .sideBarOpen{
         display: block;
+    }
+    .navLogo{
+        padding-left: 15vw;
+        padding-right: 15vw;
     }
     .menu{
         position: fixed;
@@ -186,6 +373,8 @@ nav .navBar .logo a{
     .navBar .navLinks{
         flex-direction: column;
         padding-top: 30px;
+        padding-left: 0;
+        padding-right: 0;
     }
     .navLinks li a{
         display: block;
@@ -194,132 +383,11 @@ nav .navBar .logo a{
     /* --------------------------Home---------------------------- */
     .home{
         flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .home-content{
+        align-items: center;
+        text-align: center;
     }
 }
-
-.mainBody{
-    color: var(--mainTextColour);
-    /* margin-top: 70px;
-    display: flex;
-    align-items: center; */
-    z-index: 1;
-    position: absolute;
-}
-
-.characterCanvas{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 101;
-    pointer-events: none;
-    display: none;
-}
-.characterCanvas.show {
-    display: inline;
-}
-
-#container {
-    background-color: greenyellow;
-    background-image: linear-gradient(green .1em, transparent .1em), 
-    linear-gradient(90deg, green, .1em, transparent .1em);
-    background-size: 4em 4em;
-    height: 100vh;
-}
-
-#card {
-    width: 400px;
-    height: 400px;
-    background-color: lightgreen;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.target{
-    /* background-color: purple; */
-    display: inline-block;
-    /* position: absolute; */
-}
-
-/* --------------------------Home---------------------------- */
-section{
-    padding: 10rem 12%;
-}
-.home{
-    display: flex;
-    flex-direction: auto;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
-.home-content{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    gap: 0;
-}
-.home-content p{
-    font-size: 1.5rem;
-    font-weight: 500;
-    line-height: 1.8;
-}
-.home-description{
-    max-width: 80%;
-}
-#welcome-typed{
-    color: red;
-    font-weight: bolder;
-    font-size: 3rem;
-}
-#name{
-    color: pink;
-    font-weight: bolder;
-    font-size: 4rem;
-}
-.social-icons a{
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3rem;
-    padding: 1rem;
-    background: transparent;
-    border: 2px solid var(--mainTextColour);
-    border-radius: 50%;
-    color: var(--mainTextColour);
-    margin: 3rem 0.5rem;
-    transition: 0.3s ease;
-    text-decoration: none;
-}
-.social-icons a:hover{
-    color: var(--navColour);
-    background-color: var(--mainTextColour);
-    transform: scale(1.2)translateY(-5px);
-}
-/* ------------------GOOSE HINT-------------------------------- */
-.home-goose-hint{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 140px;
-}
-.home-goose-hint img{
-    filter: brightness(0);
-}
-.home-goose-hint p{
-    text-align: center;
-}
-.home-goose-hint .hidden-text{
-    display: none;
-}
-.home-goose-hint .hidden-text span{
-    color: var(--navColour);
-    font-weight: bold;
-}
-.home-goose-hint:hover .default-text{
-    display: none;
-}
-.home-goose-hint:hover .hidden-text{
-    display: block;
-}
-
-

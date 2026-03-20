@@ -230,43 +230,7 @@ addEventListener("keyup", (e) => {
     }
 });
 
-//====================draggable========================//
-// * inspired by Appwrite: https://www.youtube.com/watch?v=ymDjvycjgUM
-// let newX = 0, newY = 0, startX = 0, startY = 0;
-
-// const card = document.getElementById('card');
-// card.addEventListener('mousedown', mouseDown);
-
-// function mouseDown(e) {
-//     startX = e.clientX;
-//     startY = e.clientY;
-
-//     document.addEventListener('mousemove', mouseMove);
-//     document.addEventListener('mouseup', mouseUp);
-// };
-
-// function mouseMove(e) {
-//     newX = startX - e.clientX;
-//     newY = startY - e.clientY;
-
-//     startX = e.clientX;
-//     startY = e.clientY;
-
-//     card.style.top = (card.offsetTop - newY) + 'px';
-//     card.style.left = (card.offsetLeft - newX) + 'px';
-// };
-
-// function mouseUp(e){
-//     document.removeEventListener('mousemove', mouseMove);
-// };
-
-//--------------list of movableElements positions
-// const moveableElements = document.querySelectorAll('.target');
-// const moveablePos = [];
-// for (let element of moveableElements) {
-//     moveablePos.append({x: element.left, y: element.top});
-// };
-
+//--------------list of movableElements with X and Y pos for translate function-------------------//
 const targetElements = document.querySelectorAll('.target');
 const targetElementsXY = new Map();
 for (let element of targetElements) {
@@ -278,22 +242,9 @@ function checkCollision() {
     const moveableElements = document.querySelectorAll('.target');
 
     for (let element of moveableElements) {
-        // moveablePos = [element.left, element.top]; 
-        // checkIntersection(character, element, moveablePos);
         checkIntersection(character, element, targetElementsXY.get(element));
     };
 };
-
-//new way to get elements - should work with flex box
-// const targetElements = document.querySelectorAll('.target');
-// const targetElementsXY = Array.from(targetElements).map(element => ({
-//     element: element,
-//     x: 0,
-//     y: 0
-// }));
-
-// console.log(targetElementsXY);
-// console.log(targetElementsXY)
 
 
 function checkIntersection(goose, element, pos) {
@@ -306,12 +257,10 @@ function checkIntersection(goose, element, pos) {
             goose.x <= r2.right &&
             (goose.x + scaledWidth) >= r2.left &&
             goose.direction == "walkUp") { 
-                // element.style.top = element.offsetTop - (r2.bottom - goose.y) + 'px';
                 let moveY = (r2.bottom - goose.y);
                 let posArray = targetElementsXY.get(element);
                 posArray[1] = posArray[1] - moveY;
                 element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
-                // console.log(posArray[1]);
             }
         //top push
         else if ((goose.y + scaledHeight) >= r2.top && 
@@ -319,7 +268,6 @@ function checkIntersection(goose, element, pos) {
             goose.x <= r2.right &&
             (goose.x + scaledWidth) >= r2.left &&
             goose.direction == "walkDown") {
-                // element.style.top = (goose.y + scaledHeight) + 'px';
                 let posArray = targetElementsXY.get(element);
                 let moveY = (goose.y + scaledHeight) - r2.top;
                 console.log(moveY);
@@ -335,7 +283,6 @@ function checkIntersection(goose, element, pos) {
             goose.y + scaledHeight >= r2.top &&
             goose.y <= r2.bottom &&
             goose.direction == "walkLeft") {
-                // element.style.left = element.offsetLeft - (r2.right - goose.x) + "px";
                 let moveX = (r2.right - goose.x);
                 let posArray = targetElementsXY.get(element);
                 posArray[0] = posArray[0] - moveX;
@@ -346,8 +293,7 @@ function checkIntersection(goose, element, pos) {
             goose.x <= r2.left + allowance &&
             (goose.y + scaledHeight) >= r2.top &&
             goose.y <= r2.bottom &&
-            goose.direction == "walkRight") {
-                // element.style.left = (goose.x + scaledWidth) + 'px';  
+            goose.direction == "walkRight") { 
                 let posArray = targetElementsXY.get(element); 
                 let moveX = (goose.x + scaledWidth) - r2.left;
                 posArray[0] = posArray[0] + moveX;
