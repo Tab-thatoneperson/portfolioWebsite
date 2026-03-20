@@ -38,6 +38,32 @@ ul{
     padding: 0;
     box-sizing: border-box;
 }
+.container{
+    max-width: 1120px;
+    margin-inline: 1.5rem;
+}
+.grid {
+    display: grid;
+    gap: 2rem;
+}
+.section-title{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+}
+.button{
+    display: inline-flex;
+    justify-content: center;
+    background-color: var(--blue);
+    color: var(--mainTextColour);
+    font-weight: 700;
+    padding: 1rem 1.5rem;
+    border-radius: .5rem;
+    transition: transform .6s, ease-in-out;
+}
+.button:hover{
+    transform: scale(1.1);
+}
 nav{
     position: fixed;
     top: 0;
@@ -161,6 +187,9 @@ nav .navBar .logo a{
     pointer-events: none;
 }
 /*-----------------------main body---------------------------------*/
+.main{
+    overflow: hidden;
+}
 .mainBody{
     color: var(--mainTextColour);
     margin-top: 70px;
@@ -192,11 +221,12 @@ nav .navBar .logo a{
 
 /* --------------------------Home---------------------------- */
 section{
+    /* width: 100vw; */
     padding: 3rem 12%;
 }
 .home{
     display: flex;
-    flex-direction: auto;
+    /* flex-direction: auto; */
     align-items: flex-start;
     justify-content: center;
     gap: 1rem;
@@ -284,9 +314,6 @@ section{
     row-gap: 3rem;
     /* justify-content: center; */
 }
-.about{
-    justify-content: center;
-}
 .about-data{
     text-align: center;
 }
@@ -305,6 +332,7 @@ section{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: .5rem;
 }
 .about-item{
@@ -322,11 +350,134 @@ section{
     color: var(--mainTextColour);
     border-color: var(--blue);
 }
+/* ------------------PROJECTS-------------------------------- */
+.projects-container{
+    row-gap: 2rem;
+    grid-template-columns: repeat(3, 350px);
+}
+.projects-card{
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 8px 16px hsla(0, 0%, 0%, .5);
+    background-color: red;
+    width: 350px;
+    height: 200px;
+    transition: transform 0.3s ease-in-out;
+}
+.projects-data{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-content: center;
+    row-gap: .5rem;
+    text-align: center;
+    border-radius: 1rem;
+}
+.projects-card:hover{
+    transform: scale(1.1);
+}
+/* ------------------CONTACT-------------------------------- */
+.contact-container{
+    row-gap: 4rem;
+    grid-template-columns: 310px 450px;
+    column-gap: 10rem;
+}
+.contact-form{
+    position: relative;
+    row-gap: 1rem;
+    /* min-width: 60vw; */
+}
+.contact-input{
+    background: var(--bodyColour);
+    color: var(--searchBar);
+    border: 2px solid var(--mainTextColour);
+    outline: none;
+    padding: 1.25rem 1rem;
+    border-radius: .5rem;
+    font-weight: 700;
+}
+.contact-input::placeholder{
+    color: var(--searchBar);
+    transition: color .4s;
+}
+.contact-input:focus::placeholder{
+    color: var(--blue);
+}
+.contact-input:autofill{
+    transition: background-color 6000s, color 6000s;
+}
+.contact-area{
+    height: 14rem;
+    resize: none;
+}
+.contact-form .button{
+    cursor: pointer;
+    justify-self: center;
+    margin-top: 1rem;
+}
+.contact-message{
+    position: absolute;
+    bottom: -3rem;
+    font-size: 15px;
+    justify-self: center;
+}
+.contact-data{
+    display: flex;
+    row-gap: 1.5rem;
+    flex-direction: column;
+}
+.contact-goose{
+    width: 100px;
+    height: auto;
+    align-self: center;
+}
+.contact-address{
+    display: flex;
+    align-items: center;
+    column-gap: 1rem;
+    font-style: initial;
+    /* justify-content: flex-start; */
+}
+.contact-address i{
+    font-size: 2rem;
+    color: var(--mainTextColour)
+}
+.contact-content{
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 2rem;
+}
+.contact-form{
+    order: 1;
+}
 
 @media(max-width: 1170px){
     .navBar .navLinks{
         padding-right: 15vw;
         padding-left: 15vw;
+    }
+    .projects-container{
+        grid-template-columns: repeat(2, 350px);
+    }
+    .contact-container{
+        grid-template-columns: 310px 350px;
+        column-gap: 4rem;
+    }
+    .contact-data{
+        row-gap: 1rem;
+    }
+    .contact-content{
+        row-gap: 1rem;
+    }
+    .contact-form .button{
+        justify-self: auto;
+    }
+    .contact-area{
+        height: 10rem;
     }
 }
 
@@ -390,5 +541,13 @@ section{
     .home-content{
         align-items: center;
         text-align: center;
+    }
+    /* --------------------------PROJECTS and CONTACT---------------------------- */
+    .projects-container,
+    .contact-container{
+        grid-template-columns: repeat(1, 350px);
+    }
+    .contact-form{
+        order: 0;
     }
 }

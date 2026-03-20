@@ -93,7 +93,6 @@
 
                     <div class="about">
                         <h3 class="about-subtitle">
-                            <i class="ri-bookmark-3-fill"></i>
                             <span>Skills</span>
                         </h3>
 
@@ -118,22 +117,86 @@
             
         </section>
 
-        
+        <!------------------PROJECTS------------------------------------>
+        <section class="projects section" id="projects">
+            <h2 class="section-title">Projects</h2>
 
-        
+            <div class="projects-container container grid">
+                <article class="projects-card">
+                    <img src="" alt="image" class="projects-img">
 
-       
+                    <div class="projects-data">
+                        <h3 class="projects-title">Project 1</h3>
+                        <p class="projects-description">Creation, design and develepment of...</p>
+                    </div>
+                </article>
 
-        <!------------------Projects---------------------------->
+                <article class="projects-card">
+                    <img src="" alt="image" class="projects-img">
+
+                    <div class="projects-data">
+                        <h3 class="projects-title">Project 2</h3>
+                        <p class="projects-description">Creation, design and develepment of...</p>
+                    </div>
+                </article>
+
+                <article class="projects-card">
+                    <img src="" alt="image" class="projects-img">
+
+                    <div class="projects-data">
+                        <h3 class="projects-title">Project 3</h3>
+                        <p class="projects-description">Creation, design and develepment of...</p>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
 
         <!------------------Contact----------------------------->
+        <section class="contact section" id="contact">
+            <h2 class="section-title">Contact Me</h2>
+
+            <div class="contact-container container grid">
+                <form action="" class="contact-form grid" id="contact-form">
+                    <input type="text" placeholder="Name" name="user-name" required class="contact-input">
+                    <input type="email" placeholder="Email" name="user-email" required class="contact-input">
+                    
+                    <textarea placeholder="Message" name="user-message" required class="contact-input contact-area"></textarea>
+
+                    <button type="submit" class="button">Send Message</button>
+
+                    <p class="contact-message" id="contact-message"></p>
+                </form>
+
+                <div class="contact-content grid">
+                    <div class="contact-data grid">
+                        <address class="contact-address">
+                            <i class="bx bx-envelope"></i>
+                            <span>tabithamorley.tm@gmail.com</span>
+                        </address>
+
+                        <address class="contact-address">
+                            <i class="bx bx-globe-oceania"></i>
+                            <span>NSW, Australia</span>
+                        </address>
+
+                        <img src="goose_single.png" alt="goose image" class="contact-goose">
+                    </div>
+                </div>
+
+            </div>    
+        </section>
 
 
     </main>
 
     <canvas class="characterCanvas"></canvas>
     
+    <!--email js-->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>"></script>
 
+    <!--main js script-->
     <script src="index.js"></script>
     
 </body>
