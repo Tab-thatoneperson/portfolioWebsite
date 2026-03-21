@@ -42,6 +42,19 @@ body.addEventListener("click", (e) => {
 });
 
 
+body.addEventListener("click", (e) => {
+    let clickedElm = e.target;
+
+    if (clickedElm.classList.contains("cancel")){
+        targetElementsXY.forEach((value, key) => {
+            targetElementsXY.set(key, [0, 0]);
+            key.style.transform = `translate(0px, 0px)`;
+            key.style.transition = `transform 1s linear`;
+        })
+    }
+});
+
+
 
 //================================= set canvas ===========//
 const ctx = canvas.getContext("2d");
@@ -243,6 +256,7 @@ function checkCollision() {
 
     for (let element of moveableElements) {
         checkIntersection(character, element, targetElementsXY.get(element));
+        element.style.transition = `none`;
     };
 };
 
