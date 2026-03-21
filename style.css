@@ -1,22 +1,42 @@
 :root{
-    --bodyColour: #E4E9F7;
-    --navColour: #4070F4;
-    --sideNav: #f57600cd;
-    --textColour: #FFF;
-    /* --searchBar: #F2F2F2;
-    --searchText: #010718; */
+    --pink: #5f0210;
+    --green: #2F6114;
+    --navColor: #9dc94b97;
+    --sideNav: #9dc94b97;
+    --lightBlue: #296065;
+    --blue: #00606B;
+    --red: #A2240B;
+    --lightRed: #B00707;
+    --bodyColor: #FFFFFF;
     --mainTextColour: #000000;
-    --darkOrange: #C44601;
-    --orange: #F57600;
-    --lightBlue: #8BABF1;
-    --blue: #0073E6;
-    --darkBlue: #054FB9;
+    --invertText: #FFFFFF;
+    --grad1: #e4f2a2;
+    --grad2: #9dc94b;
+}
+body.dark{
+    --pink: #FB657B;
+    --green: #CDD370;
+    --navColor: #6b8d2b97;
+    --sideNav: #6b8d2b97;
+    --lightBlue: #C6E4E8;
+    --blue: #2FB0BC;
+    --red: #F4765D;
+    --lightRed: #EFC1BC;
+    --bodyColor: #000000;
+    --mainTextColour: #FFFFFF;
+    --invertText: #000000;
+    --grad1: #22300c;
+    --grad2: #4A5E21;
 }
 body{
     padding: 0;
     margin: 0;
     height: 100vh;
-    background-color: var(--bodyColour);
+    background: var(--bodyColor);
+    /* background: linear-gradient(0deg,rgba(205, 211, 112, 1) 0%, rgba(198, 228, 232, 1) 64%); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* background-color: var(--bodyColour); */
     font-family: Arial, Helvetica, sans-serif;
     /* position: relative; */
     max-width: 100%;
@@ -24,19 +44,6 @@ body{
 }
 *{
     box-sizing: border-box;
-}
-body.dark{
-    --bodyColour: #18191A;
-    --navColour: #242526;
-    --sideNav: #b34c11d8;
-    --textColour: #FFF;
-    --searchBar: #242526;
-    --mainTextColour: #CCC;
-    --darkOrange: #862A14;
-    --orange: #B34D11;
-    --lightBlue: #8BABF1;
-    --blue: #1770A4;
-    --darkBlue: #0B4B7A;
 }
 ul{
     margin: 0;
@@ -60,7 +67,7 @@ ul{
     display: inline-flex;
     justify-content: center;
     background-color: var(--blue);
-    color: var(--mainTextColour);
+    color: var(--invertText);
     font-weight: 700;
     padding: 1rem 1.5rem;
     border-radius: .5rem;
@@ -75,15 +82,16 @@ nav{
     left: 0;
     height: 70px;
     width: 100%;
-    background-color: var(--orange);
+    background-color: var(--navColor);
     z-index: 100;
+    backdrop-filter: blur(10px);
 }
 nav .navBar{
     position: relative;
     height: 100%;
     /* max-width: 1000px; */
     width: 100%;
-    background-color: var(--orange);
+    background-color: var(--navColor);
     margin: 0 auto;
     /* padding: 0 30px; */
     display: flex;
@@ -91,7 +99,7 @@ nav .navBar{
     justify-content: center;
 }
 nav .navBar .sideBarOpen{
-    color: var(--textColour);
+    color: var(--mainTextColour);
     font-size: 25px;
     padding: 5px;
     cursor: pointer;
@@ -101,7 +109,7 @@ nav .navBar .sideBarOpen{
 nav .navBar .logo a{
     font-size: 25px;
     font-weight: 500;
-    color: var(--textColour);
+    color: var(--mainTextColour);
     text-decoration: none;
 }
 
@@ -114,6 +122,7 @@ nav .navBar .logo a{
     align-items: center;
     padding-right: 25vw;
     padding-left: 25vw;
+    color: var(--mainTextColour);
 }
 
 .navBar .navLinks li{
@@ -125,7 +134,7 @@ nav .navBar .logo a{
     position: relative;
     font-size: 17px;
     font-weight: 400;
-    color: var(--textColour);
+    color: var(--mainTextColour);
     text-decoration: none;
     padding: 10px;
 }
@@ -136,7 +145,7 @@ nav .navBar .logo a{
     bottom: 5px;
     height: 2px;
     width: 0;
-    background-color: var(--textColour);
+    background-color: var(--mainTextColour);
     transition: width .4s;
 }
 .navLinks li:hover a::after{
@@ -155,12 +164,13 @@ nav .navBar .logo a{
     align-items: center;
     justify-content: center;
     margin: 0 5px;
+    color: var(--mainTextColour);
 }
 
 .darkLight i, 
 .searchBox i{
     position: absolute;
-    color: var(--textColour);
+    color: var(--mainTextColour);
     font-size: 22px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -238,6 +248,11 @@ section{
     /* background-color: red; */
     max-width: 90vw;
 }
+.home-name,
+.home-subtitle{
+    margin: 0;
+    margin-bottom: -2rem;
+}
 .home-content{
     display: flex;
     flex-direction: column;
@@ -254,15 +269,16 @@ section{
 }
 .home-description{
     max-width: 80%;
+    margin-bottom: 0;
 }
 #welcome-typed{
-    color: red;
+    color: var(--lightRed);
     font-weight: bolder;
     font-size: 3rem;
     margin-right: 10px;
 }
 #name{
-    color: pink;
+    color: var(--pink);
     font-weight: bolder;
     font-size: 4rem;
 }
@@ -270,19 +286,19 @@ section{
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
     padding: 1rem;
     background: transparent;
     border: 2px solid var(--mainTextColour);
     border-radius: 50%;
     color: var(--mainTextColour);
-    margin: 3rem 0.5rem;
+    margin: 1.5rem 2rem 1.5rem 0rem;
     transition: 0.3s ease;
     text-decoration: none;
 }
 .social-icons a:hover{
-    color: var(--orange);
-    background-color: var(--mainTextColour);
+    color: var(--invertText);
+    background-color: var(--pink);
     transform: scale(1.2)translateY(-5px);
 }
 /* ------------------GOOSE HINT-------------------------------- */
@@ -291,11 +307,11 @@ section{
     justify-content: center;
     flex-direction: column;
     width: 140px;
-    margin-top: 2.5rem;
+    margin-top: 0;
 }
-.home-goose-hint img{
+/* .home-goose-hint img{
     filter: brightness(0);
-}
+} */
 .home-goose-hint p{
     text-align: center;
 }
@@ -303,7 +319,7 @@ section{
     display: none;
 }
 .home-goose-hint .hidden-text span{
-    color: var(--orange);
+    color: var(--lightRed);
     font-weight: bold;
 }
 .home-goose-hint:hover .default-text{
@@ -313,9 +329,6 @@ section{
     display: block;
 }
 /* ------------------ABOUT-------------------------------- */
-.about{
-    background-color: green;
-}
 .about-container{
     row-gap: 4rem;
 }
@@ -332,7 +345,7 @@ section{
     align-items: center;
     column-gap: 0.5rem;
     font-size: 30px;
-    color: var(--orange);
+    color: var(--pink);
     margin-bottom: 1rem;
 }
 .about-items li{
@@ -349,9 +362,9 @@ section{
     background-color: var(--blue);
     padding: .5rem .75rem;
     border-radius: 2rem;
-    color: var(--mainTextColour);
+    color: var(--invertText);
     font-weight: 600;
-    border: 2px solid var(--bodyColour);
+    border: 2px solid var(--mainTextColour);
     cursor: default;
     transition: background-color .4s, color .4s, border-color .4s;
 }
@@ -362,7 +375,7 @@ section{
 }
 /* ------------------PROJECTS-------------------------------- */
 .projects{
-    background-color: red;
+    /* background-color: red; */
 }
 .projects-container{
     row-gap: 2rem;
@@ -372,8 +385,8 @@ section{
     position: relative;
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 8px 16px hsla(0, 0%, 0%, .5);
-    background-color: red;
+    box-shadow: 0 8px 16px hsla(0, 52%, 45%, 0.5);
+    /* background-color: red; */
     width: 350px;
     height: 200px;
     transition: transform 0.3s ease-in-out;
@@ -395,7 +408,7 @@ section{
 }
 /* ------------------CONTACT-------------------------------- */
 .contact{
-    background-color: green;
+    /* background-color: green; */
 }
 .contact-container{
     row-gap: 4rem;
@@ -409,31 +422,31 @@ section{
 }
 .contact-input{
     background: var(--bodyColour);
-    color: var(--searchBar);
-    border: 2px solid var(--mainTextColour);
+    color: var(--mainTextColour);
+    border: 2px solid var(--pink);
     outline: none;
-    padding: 1.25rem 1rem;
+    padding: 1rem 1rem;
     border-radius: .5rem;
     font-weight: 700;
 }
 .contact-input::placeholder{
-    color: var(--searchBar);
+    color: var(--mainTextColour);
     transition: color .4s;
 }
 .contact-input:focus::placeholder{
-    color: var(--blue);
+    color: var(--pink);
 }
 .contact-input:autofill{
     transition: background-color 6000s, color 6000s;
 }
 .contact-area{
-    height: 14rem;
+    height: 10rem;
     resize: none;
 }
 .contact-form .button{
     cursor: pointer;
     justify-self: center;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
 }
 .contact-message{
     position: absolute;
@@ -472,9 +485,13 @@ section{
 }
 /* ------------------FOOTER-------------------------------- */
 .footer{
-    padding-block: 5rem 2rem;
-    background-color: red;
+    padding-block: 2rem 2rem;
+    /* background-color: red; */
     width: 100vw;
+    /* background: #3b6623;
+    background: linear-gradient(0deg, rgba(59, 102, 35, 1) 35%, rgba(205, 211, 112, 1) 100%); */
+    background: var(--navColor);
+    background: linear-gradient(0deg, var(--grad2) 0%, var(--grad1) 65%, var(--bodyColor) 100%);    
 }
 .footer-container{
     row-gap: 2rem;
@@ -499,7 +516,7 @@ section{
     margin-bottom: 0;
 }
 .footer-logo:hover{
-    color: var(--blue);
+    color: var(--pink);
 }
 .footer-links{
     column-gap: 3rem;
@@ -512,14 +529,15 @@ section{
     font-weight: 600;
 }
 .footer-link:hover{
-    color: var(--darkOrange);
+    /* color: var(--pink); */
+    transform: scale(1.1);
 }
 .footer-socials{
     column-gap: 1.5rem;
     justify-self: flex-end;
 }
 .footer-social{
-    color: var(--blue);
+    color: var(--mainTextColour);
     font-size: 1.5rem;
     transition: transform .4s;
 }
@@ -528,23 +546,22 @@ section{
 }
 .footer-copy{
     display: block;
-    margin-top: 5rem;
+    margin-top: 0;
     text-align: center;
     font-size: 15px;
-    color: var(--searchBar);
+    color: var(--mainTextColour);
 }
 /*-----------------------SCROLL BAR---------------------------------*/
 ::-webkit-scrollbar{
     width: .6rem;
     background-color: hsl(0, 0%, 15%);
-    border-radius: .5rem;
 }
 ::-webkit-scrollbar-thumb{
-    background-color: hsl(0, 0%, 25%);
+    background-color: hsl(0, 0%, 35%);
     border-radius: .5rem;
 }
 ::-webkit-scrollbar-thumb:hover{
-    background-color: hsl(0, 0%, 35%);
+    background-color: hsl(0, 0%, 55%);
 }
 
 /*-----------------------JUMP TO TOP OF PAGE---------------------------------*/
@@ -552,10 +569,10 @@ section{
     position: fixed;
     right: 3rem;
     bottom: -50%;
-    background-color: var(--bodyColour);
+    /* background-color: var(--bodyColor); */
     display: inline-flex;
     padding: 6px;
-    color: var(--blue);
+    color: var(--pink);
     font-size: 1.25rem;
     border-radius: .25rem;
     z-index: 2;
@@ -614,7 +631,7 @@ section{
     .menu{
         position: fixed;
         height: 100%;
-        width: 160px;
+        width: 200px;
         left: -100%;
         top: 0;
         padding: 20px;
@@ -637,7 +654,7 @@ section{
         justify-content: space-between;
     }
     .logoToggle .sideBarClose{
-        color: var(--textColour);
+        color: var(--mainTextColour);
         font-size: 24px;
         cursor: pointer;
     }
