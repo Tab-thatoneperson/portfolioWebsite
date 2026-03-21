@@ -325,3 +325,20 @@ const sendEmail = (e) => {
 }
 
 contactForm.addEventListener('submit', sendEmail);
+
+//------------------------------------SHOW JUMP TO TOP OF PAGE-----------------------------//
+const scrollUp = () =>{
+    const scrollUp = document.getElementById('scroll-up')
+    this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
+                        : scrollUp.classList.remove('show-scroll')
+}
+window.addEventListener('scroll', scrollUp);
+
+//------------------------------------SCROLL REVEAL-----------------------------//
+const sr = ScrollReveal({
+    origin: 'top',
+    distance: '60px',
+    duration: 2000,
+})
+sr.reveal(`.home`);
+sr.reveal(`.home-goose-hint`, {delay: 200, origin: 'bottom'});

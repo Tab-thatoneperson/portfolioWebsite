@@ -19,6 +19,11 @@ body{
     background-color: var(--bodyColour);
     font-family: Arial, Helvetica, sans-serif;
     /* position: relative; */
+    max-width: 100%;
+    overflow-x: hidden;
+}
+*{
+    box-sizing: border-box;
 }
 body.dark{
     --bodyColour: #18191A;
@@ -39,7 +44,7 @@ ul{
     box-sizing: border-box;
 }
 .container{
-    max-width: 1120px;
+    /* max-width: 1120px; */
     margin-inline: 1.5rem;
 }
 .grid {
@@ -196,7 +201,7 @@ nav .navBar .logo a{
     display: flex;
     align-items: center;
     z-index: 1;
-    position: absolute;
+    /* position: absolute; */
     flex-direction: column;
     width: 100vw;
 }
@@ -230,6 +235,8 @@ section{
     align-items: flex-start;
     justify-content: center;
     gap: 1rem;
+    /* background-color: red; */
+    max-width: 90vw;
 }
 .home-content{
     display: flex;
@@ -306,6 +313,9 @@ section{
     display: block;
 }
 /* ------------------ABOUT-------------------------------- */
+.about{
+    background-color: green;
+}
 .about-container{
     row-gap: 4rem;
 }
@@ -351,6 +361,9 @@ section{
     border-color: var(--blue);
 }
 /* ------------------PROJECTS-------------------------------- */
+.projects{
+    background-color: red;
+}
 .projects-container{
     row-gap: 2rem;
     grid-template-columns: repeat(3, 350px);
@@ -381,6 +394,9 @@ section{
     transform: scale(1.1);
 }
 /* ------------------CONTACT-------------------------------- */
+.contact{
+    background-color: green;
+}
 .contact-container{
     row-gap: 4rem;
     grid-template-columns: 310px 450px;
@@ -454,7 +470,107 @@ section{
 .contact-form{
     order: 1;
 }
+/* ------------------FOOTER-------------------------------- */
+.footer{
+    padding-block: 5rem 2rem;
+    background-color: red;
+    width: 100vw;
+}
+.footer-container{
+    row-gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    
+    /* width: 100%; */
+    padding: 25px;
+}
+.footer-links,
+.footer-socials{
+    display: flex;
+    justify-content: center;
+}
+.footer-logo{
+    color: var(--mainTextColour);
+    text-decoration: none;
+    font-weight: 300;
+    transition: color .4s;
+    font-size: 40px;
+    justify-self: flex-start;
+    margin-bottom: 0;
+}
+.footer-logo:hover{
+    color: var(--blue);
+}
+.footer-links{
+    column-gap: 3rem;
+}
+.footer-link{
+    color: var(--mainTextColour);
+    transition: color .4s;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+.footer-link:hover{
+    color: var(--darkOrange);
+}
+.footer-socials{
+    column-gap: 1.5rem;
+    justify-self: flex-end;
+}
+.footer-social{
+    color: var(--blue);
+    font-size: 1.5rem;
+    transition: transform .4s;
+}
+.footer-social:hover{
+    transform: translateY(-0.25rem);
+}
+.footer-copy{
+    display: block;
+    margin-top: 5rem;
+    text-align: center;
+    font-size: 15px;
+    color: var(--searchBar);
+}
+/*-----------------------SCROLL BAR---------------------------------*/
+::-webkit-scrollbar{
+    width: .6rem;
+    background-color: hsl(0, 0%, 15%);
+    border-radius: .5rem;
+}
+::-webkit-scrollbar-thumb{
+    background-color: hsl(0, 0%, 25%);
+    border-radius: .5rem;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: hsl(0, 0%, 35%);
+}
 
+/*-----------------------JUMP TO TOP OF PAGE---------------------------------*/
+.scrollup{
+    position: fixed;
+    right: 3rem;
+    bottom: -50%;
+    background-color: var(--bodyColour);
+    display: inline-flex;
+    padding: 6px;
+    color: var(--blue);
+    font-size: 1.25rem;
+    border-radius: .25rem;
+    z-index: 2;
+    transition: bottom .4s, transform .4s;
+    text-decoration: none;
+}
+.scrollup:hover{
+    transform: translateY(-.5rem);
+}
+.show-scroll{
+    bottom: 3rem;
+    right: 3rem;
+}
+
+/*----------------------- BREAKPOINTS---------------------------------*/
 @media(max-width: 1170px){
     .navBar .navLinks{
         padding-right: 15vw;
@@ -478,6 +594,9 @@ section{
     }
     .contact-area{
         height: 10rem;
+    }
+    .footer-logo{
+        font-size: 30px;
     }
 }
 
@@ -549,5 +668,27 @@ section{
     }
     .contact-form{
         order: 0;
+    }
+    /* --------------------------FOOTER---------------------------- */
+    .footer-container{
+        grid-template-columns: none;
+    }
+    .footer-logo{
+        font-size: 30px;
+        justify-self: center;
+        margin-bottom: 1rem;
+    }
+    .footer-links{
+        column-gap: 2rem;
+    }
+    .footer-socials{
+        justify-self: auto;
+    }
+}
+
+/* 2k resolutions */
+@media screen and (min-width: 2048px){
+    body{
+        zoom: 1.2;
     }
 }
