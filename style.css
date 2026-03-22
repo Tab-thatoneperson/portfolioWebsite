@@ -271,13 +271,6 @@ nav .navBar .logo a{
 .characterCanvas.show {
     display: inline;
 }
-
-.target{
-    /* background-color: purple; */
-    display: inline-block;
-    /* position: absolute; */
-}
-
 /* --------------------------Home---------------------------- */
 section{
     /* width: 100vw; */
@@ -316,17 +309,11 @@ section{
     margin-bottom: 0;
 }
 #welcome-typed{
-    /* -webkit-text-stroke: 2px black; */
-    /* for older browsers */
-	/* text-shadow:
-		-1px -1px 0 #000,
-		1px -1px 0 #000,
-		-1px 1px 0 #000,
-		1px 1px 0 #000; */
     color: var(--buttonHover);
     font-weight: bolder;
     font-size: 3rem;
     margin-right: 10px;
+    display: inline-block;
 }
 #name{
     -webkit-text-stroke: 2px #1D1D26;
@@ -339,6 +326,7 @@ section{
     color: var(--highlight);
     font-weight: bolder;
     font-size: 4rem;
+    display: inline-block;
 }
 .social-icons a{
     display: inline-flex;
@@ -355,8 +343,8 @@ section{
     text-decoration: none;
 }
 .social-icons a:hover{
-    color: var(--invertText);
-    background-color: var(--tertiary);
+    color: var(--buttonHover);
+    /* background-color: var(--tertiary); */
     transform: scale(1.2)translateY(-5px);
 }
 /* ------------------GOOSE HINT-------------------------------- */
