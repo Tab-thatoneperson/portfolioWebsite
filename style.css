@@ -15,7 +15,7 @@
     --secondary: #fffffe;
     --tertiary: #d9376e;
     --textTertiary: #9C003F;
-    --nav: #FF8D3Ce0;
+    --nav: #eff0f3;
     --navOutline: black;
     --navText: black;
     --tertiaryShadow: #d9376dbe;
@@ -279,11 +279,11 @@ section{
 .home{
     display: flex;
     /* flex-direction: auto; */
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     gap: 1rem;
     /* background-color: red; */
-    max-width: 90vw;
+    /* max-width: 90vw; */
 }
 .home-name,
 .home-subtitle{
@@ -309,7 +309,7 @@ section{
     margin-bottom: 0;
 }
 #welcome-typed{
-    color: var(--buttonHover);
+    /* color: var(--buttonHover); */
     font-weight: bolder;
     font-size: 3rem;
     margin-right: 10px;
@@ -328,6 +328,12 @@ section{
     font-size: 4rem;
     display: inline-block;
 }
+.social-icons{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
 .social-icons a{
     display: inline-flex;
     justify-content: center;
@@ -338,27 +344,27 @@ section{
     border: 3px solid var(--highlight);
     border-radius: 50%;
     color: var(--text);
-    margin: 1.5rem 2rem 1.5rem 0rem;
+    margin: 1.5rem;
     transition: 0.3s ease;
     text-decoration: none;
 }
 .social-icons a:hover{
-    color: var(--buttonHover);
-    /* background-color: var(--tertiary); */
+    color: var(--invertText);
+    background-color: var(--buttonHover);
+    border: 3px solid var(--text);
     transform: scale(1.2)translateY(-5px);
 }
 /* ------------------GOOSE HINT-------------------------------- */
 .goose-container{
     width: 80px;
-    
 }
 .home-goose-hint{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    width: 140px;
-    margin-top: 30px;
+    width: 200px;
+    margin: 30px 50px 30px 10px;
 }
 .home-goose-hint img{
     /* filter: brightness(0); */
@@ -775,6 +781,12 @@ section{
     .home-name,
     .home-subtitle{
         margin-bottom: 1rem;
+    }
+    .home-goose-hint{
+        margin: 30px 50px 30px 50px;
+    }
+    .social-icons{
+        flex-direction: row;
     }
     /*-------------------------ABOUT--------------------------------*/
     .col2-section{
