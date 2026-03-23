@@ -2,7 +2,7 @@ const body = document.querySelector("body"),
       nav = document.querySelector("nav"),
       canvas = document.querySelector(".characterCanvas"),
       modeToggle = document.querySelector(".darkLight"),
-      searchToggle = document.querySelector(".searchBox"),
+      gooseToggle = document.querySelector(".gooseSwitch"),
       sideBarOpen = document.querySelector(".sideBarOpen"),
       sideBarClose = document.querySelector(".sideBarClose");
 
@@ -24,8 +24,8 @@ const body = document.querySelector("body"),
       });
 
       //toggle silly mode
-      searchToggle.addEventListener("click", () => {
-        searchToggle.classList.toggle("active");
+      gooseToggle.addEventListener("click", () => {
+        gooseToggle.classList.toggle("active");
         canvas.classList.toggle("show");
       });
 
@@ -52,7 +52,23 @@ body.addEventListener("click", (e) => {
             key.style.transition = `transform 1s linear`;
         })
     }
+    // if goose is active - get the goose to spawn on the goose image
+    else if(clickedElm.classList.contains("goose")){
+        const gooseSpawn = document.getElementById("goose-image");
+        const goosePos = gooseSpawn.getBoundingClientRect();
+        let gooseSpawnX = goosePos.x;
+        let gooseSpawnY = goosePos.y;
+
+        // so the goose does not spawn far off the screen if goose image
+        // is not visable
+        if (gooseSpawnY < 0) { gooseSpawnY = 0; };
+
+        character.x = gooseSpawnX;
+        character.y = gooseSpawnY;
+    }
 });
+
+
 
 
 

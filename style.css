@@ -196,12 +196,12 @@ nav .navBar .logo a{
     width: 90%;
 }
 
-.navBar .darkLight-searchBox{
+.navBar .darkLight-gooseSwitch{
     display: flex;
     align-items: center;
 }
-.darkLight-searchBox .darkLight,
-.darkLight-searchBox .searchBox{
+.darkLight-gooseSwitch .darkLight,
+.darkLight-gooseSwitch .gooseSwitch{
     height: 40px;
     width: 40px;
     display: flex;
@@ -212,7 +212,7 @@ nav .navBar .logo a{
 }
 
 .darkLight i, 
-.searchBox i{
+.gooseSwitch i{
     position: absolute;
     color: var(--navText);
     font-size: 22px;
@@ -233,15 +233,15 @@ nav .navBar .logo a{
     pointer-events: none;
 }
 
-.searchBox i.cancel{
+.gooseSwitch i.cancel{
     opacity: 0;
     pointer-events: none;
 }
-.searchBox.active i.cancel{
+.gooseSwitch.active i.cancel{
     opacity: 1;
     pointer-events: auto;
 }
-.searchBox.active i.search{
+.gooseSwitch.active i.goose{
     opacity: 0;
     pointer-events: none;
 }
@@ -371,6 +371,7 @@ section{
     width: 100%;
     height: auto;
     object-fit: contain;
+    /* background-color: red; */
 }
 .home-goose-hint p{
     text-align: center;
