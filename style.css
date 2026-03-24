@@ -15,7 +15,7 @@
     --secondary: #fffffe;
     --tertiary: #d9376e;
     --textTertiary: #9C003F;
-    --nav: #eff0f3;
+    --nav: #eff0f3c7;
     --navOutline: black;
     --navText: black;
     --tertiaryShadow: #d9376dbe;
@@ -127,7 +127,7 @@ nav{
     background-color: var(--nav);
     /* border-bottom: 3px solid var(--navOutline); */
     box-shadow: 0 8px 16px var(--highlightShadow);
-    z-index: 100;
+    z-index: 105;
     backdrop-filter: blur(10px);
 }
 nav .navBar{
@@ -254,8 +254,8 @@ nav .navBar .logo a{
     margin-top: 70px;
     display: flex;
     align-items: center;
-    z-index: 1;
-    /* position: absolute; */
+    z-index: 100;
+    position: relative;
     flex-direction: column;
     width: 100vw;
 }
@@ -264,12 +264,15 @@ nav .navBar .logo a{
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 101;
+    z-index: 10;
     pointer-events: none;
     display: none;
 }
 .characterCanvas.show {
     display: inline;
+}
+.target{
+    position: relative;
 }
 /* --------------------------Home---------------------------- */
 section{
@@ -676,7 +679,7 @@ section{
     color: var(--text);
     font-size: 1.25rem;
     border-radius: .25rem;
-    z-index: 2;
+    z-index: 101;
     transition: bottom .4s, transform .4s;
     text-decoration: none;
 }
@@ -737,7 +740,7 @@ section{
         top: 0;
         padding: 20px;
         background-color: var(--nav);
-        z-index: 100;
+        z-index: 105;
         transition: all 0.4s ease;
     }
     nav.active .menu{

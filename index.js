@@ -106,6 +106,7 @@ const character = {
     moving: false,
     verticalMove: false,
     direction: "idle",
+    grab: false,
 };
 
 const animations = {
@@ -122,6 +123,7 @@ const keys = {
     a: false,
     d: false,
     shift: false,
+    grab: false,
 };
 
 //================================= update canvas ===========//
@@ -137,6 +139,7 @@ resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 function updateCharacter() {
+    // character sprinting
     if (keys.shift) {
         character.speed = 6;
     }
@@ -144,6 +147,15 @@ function updateCharacter() {
         character.speed = 3;
     }
 
+    // character grabing
+    if (keys.grab) {
+        character.grab = true;
+    }
+    else{
+        character.grab = false;
+    }
+
+    // character moving 
     if (keys.w && (character.y > character.speed)) {
         // console.log(character.y)
         character.y -= character.speed;
@@ -222,6 +234,20 @@ addEventListener("keydown", (e) => {
     if (e.key == 'Shift'){
         keys.shift = true;
     }
+
+    //trying to grab elements true
+    if (e.key.toLowerCase() == "q" || e.key.toLowerCase() == "e") {
+        keys.grab = true;
+
+        //if already grabbed element, drop it
+        grabbedElements.forEach(element => {
+            console.log(element);
+            let posArray = targetElementsXY.get(element);
+            posArray[2] = 0;
+        });
+        grabbedElements = [];
+    }
+
     switch(e.key.toLowerCase()) {
         case "w":
             keys.w = true;
@@ -241,6 +267,9 @@ addEventListener("keydown", (e) => {
 addEventListener("keyup", (e) => {
     if (e.key == 'Shift'){
         keys.shift = false;
+    }
+    if (e.key.toLowerCase() == "q" || e.key.toLowerCase() == "e") {
+        keys.grab = false;
     }
 
     switch(e.key.toLowerCase()) {
@@ -263,9 +292,11 @@ addEventListener("keyup", (e) => {
 const targetElements = document.querySelectorAll('.target');
 const targetElementsXY = new Map();
 for (let element of targetElements) {
+                                //x, y, grabbed
     targetElementsXY.set(element, [0, 0]);
 }
-console.log(targetElementsXY);
+let grabbedElements = [];
+// console.log(targetElementsXY);
 
 function checkCollision() {
     const moveableElements = document.querySelectorAll('.target');
@@ -279,57 +310,94 @@ function checkCollision() {
 
 function checkIntersection(goose, element, pos) {
     let r2 = element.getBoundingClientRect();
-    // y axis
-    if (goose.verticalMove) {
-        //bottom push
-        if (goose.y <= r2.bottom &&
-            goose.y >= (r2.bottom - allowance) &&
-            goose.x <= r2.right &&
-            (goose.x + scaledWidth) >= r2.left &&
-            goose.direction == "walkUp") { 
-                let moveY = (r2.bottom - goose.y);
-                let posArray = targetElementsXY.get(element);
-                posArray[1] = posArray[1] - moveY;
-                element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+    let posArray = targetElementsXY.get(element);
+    const allowance = 5;
+
+    if (goose.grab) {
+        
+        if (goose.y <= r2.bottom + allowance &&
+            goose.y >= r2.top - allowance &&
+            goose.x <= r2.right + allowance &&
+            (goose.x + scaledWidth) >= r2.left - allowance) {
+                grabbedElements.push(element);
+                posArray[2] = 1;
             }
-        //top push
-        else if ((goose.y + scaledHeight) >= r2.top && 
-            (goose.y + scaledHeight) <= (r2.top + allowance) &&
-            goose.x <= r2.right &&
-            (goose.x + scaledWidth) >= r2.left &&
-            goose.direction == "walkDown") {
-                let posArray = targetElementsXY.get(element);
-                let moveY = (goose.y + scaledHeight) - r2.top;
-                console.log(moveY);
-                posArray[1] = posArray[1] + moveY;
-                element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
-            };
-        }
-    // x axis
-    else {
-        //left push
-        if (goose.x <= r2.right && 
-            goose.x >= (r2.right - allowance) &&  
-            goose.y + scaledHeight >= r2.top &&
-            goose.y <= r2.bottom &&
-            goose.direction == "walkLeft") {
-                let moveX = (r2.right - goose.x);
-                let posArray = targetElementsXY.get(element);
-                posArray[0] = posArray[0] - moveX;
-                element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
-            }
-        //right push
-        else if ((goose.x + scaledWidth) >= r2.left && 
-            goose.x <= r2.left + allowance &&
-            (goose.y + scaledHeight) >= r2.top &&
-            goose.y <= r2.bottom &&
-            goose.direction == "walkRight") { 
-                let posArray = targetElementsXY.get(element); 
-                let moveX = (goose.x + scaledWidth) - r2.left;
-                posArray[0] = posArray[0] + moveX;
-                element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;             
-            };
     }
+    if (posArray[2] == 1) {
+        if (goose.direction == "walkDown"){
+            posArray[0] = posArray[0] - (r2.right - (goose.x + scaledWidth/2)) + (r2.right - r2.left)/2;
+            posArray[1] = posArray[1] + (goose.y + scaledHeight/6 - r2.bottom + (r2.bottom - r2.top));
+            element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+        }
+        else if (goose.direction == "walkUp"){
+            posArray[0] = posArray[0] - (r2.right - (goose.x + scaledWidth/2)) + (r2.right - r2.left)/2;
+            posArray[1] = posArray[1] + (goose.y - r2.bottom + scaledHeight/6);
+            element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+        }
+        else if (goose.direction == "walkLeft"){
+            posArray[0] = posArray[0] + (goose.x - r2.right) + scaledWidth/5;
+            posArray[1] = posArray[1] + (goose.y + scaledHeight/6 - r2.bottom + (r2.bottom - r2.top));
+            element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+        }
+        else if (goose.direction == "walkRight"){
+            posArray[0] = posArray[0] - (r2.left - goose.x - scaledWidth/1.3);
+            posArray[1] = posArray[1] + (goose.y + scaledHeight/6 - r2.bottom + (r2.bottom - r2.top));
+            element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+        }
+    }
+    else {
+        // y axis
+        if (goose.verticalMove) {
+            //bottom push
+            if (goose.y <= r2.bottom -allowance &&
+                goose.y >= (r2.bottom - allowance) + allowance &&
+                goose.x <= r2.right - allowance &&
+                (goose.x + scaledWidth) >= r2.left + allowance &&
+                goose.direction == "walkUp") { 
+                    let moveY = (r2.bottom - goose.y);
+                    let posArray = targetElementsXY.get(element);
+                    posArray[1] = posArray[1] - moveY;
+                    element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+                }
+            //top push
+            else if ((goose.y + scaledHeight) >= r2.top + allowance && 
+                (goose.y + scaledHeight) <= (r2.top + allowance) - allowance &&
+                goose.x <= r2.right - allowance &&
+                (goose.x + scaledWidth) >= r2.left + allowance &&
+                goose.direction == "walkDown") {
+                    let posArray = targetElementsXY.get(element);
+                    let moveY = (goose.y + scaledHeight) - r2.top;
+                    console.log(moveY);
+                    posArray[1] = posArray[1] + moveY;
+                    element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+                };
+            }
+        // x axis
+        else {
+            //left push
+            if (goose.x <= r2.right - allowance && 
+                goose.x >= (r2.right - allowance) + allowance &&  
+                goose.y + scaledHeight >= r2.top + allowance &&
+                goose.y <= r2.bottom - allowance &&
+                goose.direction == "walkLeft") {
+                    let moveX = (r2.right - goose.x);
+                    let posArray = targetElementsXY.get(element);
+                    posArray[0] = posArray[0] - moveX;
+                    element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+                }
+            //right push
+            else if ((goose.x + scaledWidth) >= r2.left + allowance && 
+                goose.x <= r2.left + allowance - allowance &&
+                (goose.y + scaledHeight) >= r2.top + allowance &&
+                goose.y <= r2.bottom - allowance &&
+                goose.direction == "walkRight") { 
+                    let posArray = targetElementsXY.get(element); 
+                    let moveX = (goose.x + scaledWidth) - r2.left;
+                    posArray[0] = posArray[0] + moveX;
+                    element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;             
+                };
+        }
+    }   
 };
 
 //------------------------------------CONTACT EMAIL JS-----------------------------//
