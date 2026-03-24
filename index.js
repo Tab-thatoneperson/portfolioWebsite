@@ -311,7 +311,7 @@ function checkCollision() {
 function checkIntersection(goose, element, pos) {
     let r2 = element.getBoundingClientRect();
     let posArray = targetElementsXY.get(element);
-    const allowance = 5;
+    const grabRoom = 5; //ensure user can pick up element before pushing it
 
     if (goose.grab) {
         
@@ -323,6 +323,7 @@ function checkIntersection(goose, element, pos) {
                 posArray[2] = 1;
             }
     }
+    
     if (posArray[2] == 1) {
         if (goose.direction == "walkDown"){
             posArray[0] = posArray[0] - (r2.right - (goose.x + scaledWidth/2)) + (r2.right - r2.left)/2;
@@ -349,22 +350,24 @@ function checkIntersection(goose, element, pos) {
         // y axis
         if (goose.verticalMove) {
             //bottom push
-            if (goose.y <= r2.bottom -allowance &&
-                goose.y >= (r2.bottom - allowance) + allowance &&
-                goose.x <= r2.right - allowance &&
-                (goose.x + scaledWidth) >= r2.left + allowance &&
+            if (goose.y <= r2.bottom -grabRoom &&
+                goose.y >= (r2.bottom - allowance) + grabRoom &&
+                goose.x <= r2.right - grabRoom &&
+                (goose.x + scaledWidth) >= r2.left + grabRoom &&
                 goose.direction == "walkUp") { 
+                    console.log('vertical - bottom');
                     let moveY = (r2.bottom - goose.y);
                     let posArray = targetElementsXY.get(element);
                     posArray[1] = posArray[1] - moveY;
                     element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
                 }
             //top push
-            else if ((goose.y + scaledHeight) >= r2.top + allowance && 
-                (goose.y + scaledHeight) <= (r2.top + allowance) - allowance &&
-                goose.x <= r2.right - allowance &&
-                (goose.x + scaledWidth) >= r2.left + allowance &&
+            else if ((goose.y + scaledHeight) >= r2.top + grabRoom && 
+                (goose.y + scaledHeight) <= (r2.top + allowance) - grabRoom &&
+                goose.x <= r2.right - grabRoom &&
+                (goose.x + scaledWidth) >= r2.left + grabRoom &&
                 goose.direction == "walkDown") {
+                    console.log('vertical - top');
                     let posArray = targetElementsXY.get(element);
                     let moveY = (goose.y + scaledHeight) - r2.top;
                     console.log(moveY);
@@ -375,22 +378,24 @@ function checkIntersection(goose, element, pos) {
         // x axis
         else {
             //left push
-            if (goose.x <= r2.right - allowance && 
-                goose.x >= (r2.right - allowance) + allowance &&  
-                goose.y + scaledHeight >= r2.top + allowance &&
-                goose.y <= r2.bottom - allowance &&
+            if (goose.x <= r2.right - grabRoom && 
+                goose.x >= (r2.right - allowance) + grabRoom &&  
+                goose.y + scaledHeight >= r2.top + grabRoom &&
+                goose.y <= r2.bottom - grabRoom &&
                 goose.direction == "walkLeft") {
+                    console.log('horizontal - left');
                     let moveX = (r2.right - goose.x);
                     let posArray = targetElementsXY.get(element);
                     posArray[0] = posArray[0] - moveX;
                     element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
                 }
             //right push
-            else if ((goose.x + scaledWidth) >= r2.left + allowance && 
-                goose.x <= r2.left + allowance - allowance &&
-                (goose.y + scaledHeight) >= r2.top + allowance &&
-                goose.y <= r2.bottom - allowance &&
+            else if ((goose.x + scaledWidth) >= r2.left + grabRoom && 
+                goose.x <= r2.left + allowance - grabRoom &&
+                (goose.y + scaledHeight) >= r2.top + grabRoom &&
+                goose.y <= r2.bottom - grabRoom &&
                 goose.direction == "walkRight") { 
+                    console.log('horizontal - right');
                     let posArray = targetElementsXY.get(element); 
                     let moveX = (goose.x + scaledWidth) - r2.left;
                     posArray[0] = posArray[0] + moveX;

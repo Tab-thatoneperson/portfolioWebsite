@@ -367,7 +367,8 @@ section{
     flex-direction: column;
     align-items: center;
     width: 200px;
-    margin: 30px 50px 30px 10px;
+    height: 100%;
+    margin: 0px 50px 0px 10px;
 }
 .home-goose-hint img{
     /* filter: brightness(0); */
