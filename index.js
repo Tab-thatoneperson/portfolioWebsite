@@ -222,6 +222,7 @@ function animate() {
         updateCharacter();
         drawCharacter();
         checkCollision();
+        checkScroll();
     };
     requestAnimationFrame(animate);
 };
@@ -404,6 +405,19 @@ function checkIntersection(goose, element, pos) {
         }
     }   
 };
+
+function checkScroll(){
+    if (character.y < 70) {
+        window.scrollBy({
+            top: -3,
+        });
+    }
+    if (character.y + scaledHeight > window.innerHeight) {
+        window.scrollBy({
+            top: 3,
+        });
+    }
+}
 
 //------------------------------------CONTACT EMAIL JS-----------------------------//
 const contactForm = document.getElementById('contact-form'),
