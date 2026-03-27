@@ -74,7 +74,7 @@ body.addEventListener("click", (e) => {
 
         // so the goose does not spawn far off the screen if goose image
         // is not visable
-        if (gooseSpawnY < 0) { gooseSpawnY = 90; };
+        if (gooseSpawnY < 0) { gooseSpawnY = canvas.height / 3; };
 
         character.x = gooseSpawnX;
         character.y = gooseSpawnY;

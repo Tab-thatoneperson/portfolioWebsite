@@ -857,7 +857,7 @@ div.email > span:nth-child(2) {
     }
     .navLogo{
         padding-left: 15vw;
-        padding-right: 15vw;
+        padding-right: 10vw;
     }
     .menu{
         position: fixed;
