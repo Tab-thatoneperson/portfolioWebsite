@@ -3,6 +3,8 @@ const body = document.querySelector("body"),
       canvas = document.querySelector(".characterCanvas"),
       modeToggle = document.querySelector(".darkLight"),
       gooseToggle = document.querySelector(".gooseSwitch"),
+      gooseInfo = document.querySelector(".goose-instructions"),
+      infoToggle = document.querySelector(".infoCircle"),
       sideBarOpen = document.querySelector(".sideBarOpen"),
       sideBarClose = document.querySelector(".sideBarClose");
 
@@ -10,7 +12,6 @@ const body = document.querySelector("body"),
     if(getMode && getMode === "darkMode"){
         body.classList.add("dark");
     };
-
     //toggle light and dark mode
       modeToggle.addEventListener("click", () => {
         modeToggle.classList.toggle("active");
@@ -27,6 +28,18 @@ const body = document.querySelector("body"),
       gooseToggle.addEventListener("click", () => {
         gooseToggle.classList.toggle("active");
         canvas.classList.toggle("show");
+        infoToggle.classList.toggle("active");
+        //open or close info section if goose is not active
+        
+        if(gooseToggle.classList.contains("active")){
+            if (!localStorage.getItem("infoPopupGiven")){
+                gooseInfo.classList.add("active");
+
+                localStorage.setItem("infoPopupGiven", "true");
+            }
+        } else if (gooseInfo.classList.contains("active")) {
+            gooseInfo.classList.remove("active");
+        }
       });
 
       //toggle side bar
@@ -65,6 +78,14 @@ body.addEventListener("click", (e) => {
 
         character.x = gooseSpawnX;
         character.y = gooseSpawnY;
+    }
+
+    else if(clickedElm.classList.contains("info")){
+        gooseInfo.classList.toggle("active");
+    }
+
+    else if(clickedElm.classList.contains("instruction-exit")){
+        gooseInfo.classList.remove("active");
     }
 });
 
@@ -232,6 +253,10 @@ animate();
 
 
 addEventListener("keydown", (e) => {
+    if(gooseInfo.classList.contains("active")){
+        gooseInfo.classList.remove("active");
+    }
+
     if (e.key == 'Shift'){
         keys.shift = true;
     }

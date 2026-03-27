@@ -23,6 +23,9 @@
     --scrollBarBackground: #660029;
     --scrollBar: #F1B1C7;
     --scrollBarSelect: #FEF6F8;
+    --popupBackground: #FFEDD6;
+    --popupText: black;
+    --gooseFilter: 0;
 }
 body.dark{
     --background: #0f0e17;
@@ -49,6 +52,9 @@ body.dark{
     --scrollBarBackground: #660029;
     --scrollBar: #F1B1C7;
     --scrollBarSelect: #FEF6F8;
+    --popupBackground: #2c0b18;
+    --popupText: white;
+    --gooseFilter: 1;
 }
 body{
     padding: 0;
@@ -202,7 +208,8 @@ nav .navBar .logo a{
     align-items: center;
 }
 .darkLight-gooseSwitch .darkLight,
-.darkLight-gooseSwitch .gooseSwitch{
+.darkLight-gooseSwitch .gooseSwitch,
+.darkLight-gooseSwitch .infoCircle{
     height: 40px;
     width: 40px;
     display: flex;
@@ -213,7 +220,8 @@ nav .navBar .logo a{
 }
 
 .darkLight i, 
-.gooseSwitch i{
+.gooseSwitch i,
+.infoCircle i{
     position: absolute;
     color: var(--navText);
     font-size: 22px;
@@ -245,6 +253,14 @@ nav .navBar .logo a{
 .gooseSwitch.active i.goose{
     opacity: 0;
     pointer-events: none;
+}
+.infoCircle i.info{
+    display: none;
+    pointer-events: none;
+}
+.infoCircle.active i.info{
+    display: flex;
+    pointer-events: auto;
 }
 /*-----------------------main body---------------------------------*/
 .main{
@@ -372,11 +388,10 @@ section{
     margin: 0px 50px 0px 10px;
 }
 .home-goose-hint img{
-    filter: brightness(0);
+    filter: brightness(0) invert(var(--gooseFilter));
     width: 100%;
     height: auto;
     object-fit: contain;
-    /* background-color: red; */
 }
 .home-goose-hint p{
     text-align: center;
@@ -720,11 +735,82 @@ section{
     right: 2rem;
 }
 
+/*----------------------- INSTRUCTION POPUP---------------------------------*/
+.top-line{
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+.instruction-exit{
+    margin: 10px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+.top-line h2{
+    margin: 10px;
+    font-weight: 700;
+}
+.goose-instructions{
+    display: none;
+    pointer-events: none;
+    
+}
+.goose-instructions.active{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    z-index: 106;
+}
+.instruction-content{
+    background-color: var(--popupBackground);
+    border-radius: 5px;
+    box-shadow: 0 8px 16px var(--highlightShadow);
+    padding: 15px 25px;
+    text-align: center;
+    width: 400px;
+    color: var(--popupText);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.instruction-keys{
+    display: grid;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    padding: 0px 20%;
+}
+.info-name{
+    text-align: left;
+    margin: 5px;
+}
+.info-key{
+    text-align: right;
+}
+.instruction-close{
+    color: var(--textTertiary);
+    font-size: medium;
+}
+.info-breaker{
+    width: 40%;
+    height: 2px;
+    background-color: var(--tertiary);
+    border-radius: 25px;
+    margin: 10px;
+}
 /*----------------------- BREAKPOINTS---------------------------------*/
 @media(max-width: 1170px){
     .navBar .navLinks{
-        padding-right: 15vw;
-        padding-left: 15vw;
+        padding-right: 10vw;
+        padding-left: 10vw;
     }
     .projects-container{
         grid-template-columns: repeat(2, 350px);
@@ -852,6 +938,14 @@ section{
     }
     .footer-socials{
         justify-self: auto;
+    }
+
+    .instruction-content{
+        width: 350px;
+    }
+
+    .instruction-keys{
+        padding: 0px 20%;
     }
 }
 

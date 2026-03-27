@@ -41,7 +41,11 @@
 
                 <div class="gooseSwitch">
                     <i class="bx bx-x cancel"></i>
-                    <i class="bx bx-duck bx-beat goose"></i>
+                    <i class="bx bx-duck bx-beat goose"></i>                    
+                </div>
+
+                <div class="infoCircle">
+                    <i class="bx bx-info-circle info"></i>
                 </div>
             </div>
         <div>
@@ -317,6 +321,37 @@
     <a href="#home" class="scrollup" id="scroll-up">
         <i class="bx bx-arrow-to-top"></i>
     </a>
+
+    <!------------------POPUP FOR CHARACTER MOVEMENT----------------------------->
+    <!--referenced from Florin Pop: https://www.youtube.com/watch?v=r_PL0K2fGkY -->
+    <div class="goose-instructions">
+        <div class="instruction-content">
+            <div class="top-line">
+                <h2>Movement Instructions</h2>
+                <!-- maybe x cancel button -->
+                 <p class="instruction-exit">X</p>
+            </div>
+
+            <div class="info-breaker target"></div>
+
+            <div class="instruction-keys">
+                <p class="info-name">Move up:</p><span class="info-key">w</span>
+                <p class="info-name">Move left:</p><span class="info-key">a</span>
+                <p class="info-name">Move down:</p><span class="info-key">s</span>
+                <p class="info-name">Move right:</p><span class="info-key">d</span>
+            </div>
+            <div class="info-breaker target"></div>
+            <div class="instruction-keys">
+                <p class="info-name">Grab:</p><span class="info-key">e</span>
+                <p class="info-name">Drop:</p><span class="info-key">e</span>
+            </div>
+
+            <div class="info-breaker target"></div>
+
+            <!-- or any button to close -->
+            <p class="instruction-close">Press any key to close</p>
+        </div>
+    </div>
 
     <canvas class="characterCanvas"></canvas>
     
