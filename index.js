@@ -461,8 +461,13 @@ const sendEmail = (e) => {
         }, 5000)
 
         contactForm.reset();
-    }, () => {
-        contactMessage.textContent = 'Message not sent (service error)'
+    }, (error) => {
+        if (error.status === 429) {
+            contactMessage.textContent = 'Unable to send a message via Emailjs at this time. Please reach out via my email!';
+        }
+        else {
+            contactMessage.textContent = 'Message not sent (service error)';
+        }
     })
 }
 

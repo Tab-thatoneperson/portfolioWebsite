@@ -597,9 +597,11 @@ section{
 }
 .contact-message{
     position: absolute;
-    bottom: -3rem;
+    bottom: -5rem;
     font-size: 15px;
     justify-self: center;
+    text-align: center;
+    line-height: 25px;
 }
 .contact-data{
     display: flex;
@@ -629,6 +631,9 @@ section{
 }
 .contact-form{
     order: 1;
+}
+div.email > span:nth-child(2) {
+	display: none;
 }
 /* ------------------FOOTER-------------------------------- */
 .footer{

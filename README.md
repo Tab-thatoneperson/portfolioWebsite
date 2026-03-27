@@ -10,3 +10,5 @@ CodingLab: https://www.youtube.com/watch?v=TWiy3dGSmgk&list=PLImJ3umGjxdBzMlTvJk
     responsive navBar and darkmode/lightmode
 Florin Pop: https://www.youtube.com/watch?v=r_PL0K2fGkY
     popup notification - used to display goose movement
+https://spencermortensen.com/articles/email-obfuscation/#text-entity
+    hiding email in html
