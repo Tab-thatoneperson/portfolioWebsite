@@ -70,7 +70,7 @@ body.addEventListener("click", (e) => {
         const gooseSpawn = document.getElementById("goose-image");
         const goosePos = gooseSpawn.getBoundingClientRect();
         let gooseSpawnX = goosePos.x;
-        let gooseSpawnY = goosePos.y;
+        let gooseSpawnY = (goosePos.y + 1.5);
 
         // so the goose does not spawn far off the screen if goose image
         // is not visable
@@ -103,16 +103,22 @@ canvas.height = window.innerHeight;
 //================================= user character ===========//
 // * inspired by The Normie Programmer: https://www.youtube.com/watch?v=ZpZLmpKa2zw
 const characterImage = new Image();
-characterImage.src = "goose_v2.png";
+characterImage.src = "goose_front.png";
 
-const totalImageHeight = 1280;
-const totalImageWidth = 1280;
-const gooseHeight = 320;
-const gooseWidth = 320;
+//main variables for goose
+let gooseHeight = 302;
+let gooseWidth = 130;
 const scale = 0.6;
-const scaledWidth = gooseHeight * scale;
-const scaledHeight = gooseWidth * scale;
+let scaledWidth = gooseWidth * scale;
+let scaledHeight = gooseHeight * scale;
 const allowance = 15;
+
+//different sizes for the two sprite sheets
+const gooseFrontHeight = 302;
+const gooseSideHeight = 305;
+const gooseFrontWidth = 130;
+const gooseSideWidth = 264;
+
 
 const character = {
     x: canvas.width / 2 - scaledWidth / 2,
@@ -134,8 +140,8 @@ const animations = {
     walkDown: 0,
     idle: 1,
     walkUp: 2,
-    walkRight: 3,
-    walkLeft: 3,
+    walkRight: 0,
+    walkLeft: 1,
 };
 
 const keys = {
@@ -181,41 +187,55 @@ function updateCharacter() {
         // console.log(character.y)
         character.y -= character.speed;
         character.direction = "walkUp";
+        characterImage.src = "goose_front.png";
+        gooseHeight = gooseFrontHeight;
+        gooseWidth = gooseFrontWidth;
         character.moving = true;
         character.verticalMove = true;
     } else if (keys.s && (character.y + scaledHeight < canvas.height + character.speed)) {
         character.y += character.speed;
         character.direction = "walkDown";
+        characterImage.src = "goose_front.png";
+        gooseHeight = gooseFrontHeight;
+        gooseWidth = gooseFrontWidth;
         character.moving = true;
         character.verticalMove = true;
     } else if (keys.a && (character.x > character.speed)) {
         character.x -= character.speed;
         character.direction = "walkLeft";
+        characterImage.src = "goose_side.png";
+        gooseHeight = gooseSideHeight;
+        gooseWidth = gooseSideWidth;
         character.moving = true;
         character.verticalMove = false;
     } else if (keys.d && (character.x + scaledWidth < canvas.width + character.speed)) {
         character.x += character.speed;
         character.direction = "walkRight";
+        characterImage.src = "goose_side.png";
+        gooseHeight = gooseSideHeight;
+        gooseWidth = gooseSideWidth;
         character.moving = true;
         character.verticalMove = false;
     } else {
         character.direction = "idle";
+        characterImage.src = "goose_front.png";
+        gooseHeight = gooseFrontHeight;
+        gooseWidth = gooseFrontWidth;
         character.moving = false;
         character.verticalMove = false;
     }
 
+    scaledWidth = gooseWidth * scale;
+    scaledHeight = gooseHeight * scale;
+
     character.frameY = animations[character.direction];
-    // console.log("ANIMATIONS: " + animations[character.direction]);
 
     character.frameTimer++;
     const currentInterval = character.moving ? character.frameInterval : character.idleFrameInterval;
     if (character.frameTimer >= currentInterval) {
         character.frameX = (character.frameX + 1) % character.maxFrame;
         character.frameTimer = 0;
-        // console.log("sX: " + character.frameX + " sY: " + character.frameY);
     }
-
-    //console.log(character.x);
 
 };
 
@@ -248,7 +268,6 @@ function animate() {
     requestAnimationFrame(animate);
 };
 
-// characterImage.onload = drawCharacter;
 animate();
 
 

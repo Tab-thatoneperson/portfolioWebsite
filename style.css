@@ -425,8 +425,7 @@ section{
 .about-info{
     font-weight: 700;
     font-size: 30px;
-    margin-top: 0;
-    margin-bottom: 15px;
+    margin: 30px;
 }
 .about-subtitle,
 .education-subtitle{
@@ -469,9 +468,16 @@ section{
 }
 .col2-section{
     display: flex;
+    /* margin: 30px; */
 }
 .education-col1{
     width: 70vw;
+    padding: 30px;
+    padding-top: 0;
+}
+.tech{
+    padding: 30px;
+    padding-top: 0;
 }
 .education-subtitle span{
     column-gap: 0.5rem;
