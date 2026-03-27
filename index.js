@@ -103,7 +103,7 @@ canvas.height = window.innerHeight;
 //================================= user character ===========//
 // * inspired by The Normie Programmer: https://www.youtube.com/watch?v=ZpZLmpKa2zw
 const characterImage = new Image();
-characterImage.src = "goose_v2.PNG";
+characterImage.src = "goose_v2.png";
 
 const totalImageHeight = 1280;
 const totalImageWidth = 1280;
