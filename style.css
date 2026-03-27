@@ -302,6 +302,7 @@ section{
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    margin-top: 5vh;
     /* background-color: red; */
     /* max-width: 90vw; */
 }
