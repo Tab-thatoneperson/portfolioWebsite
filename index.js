@@ -74,7 +74,7 @@ body.addEventListener("click", (e) => {
 
         // so the goose does not spawn far off the screen if goose image
         // is not visable
-        if (gooseSpawnY < 0) { gooseSpawnY = 0; };
+        if (gooseSpawnY < 0) { gooseSpawnY = 90; };
 
         character.x = gooseSpawnX;
         character.y = gooseSpawnY;
@@ -453,12 +453,12 @@ function checkIntersection(goose, element, pos) {
 function checkScroll(){
     if (character.y < 70) {
         window.scrollBy({
-            top: -3,
+            top: -5,
         });
     }
     if (character.y + scaledHeight > window.innerHeight) {
         window.scrollBy({
-            top: 3,
+            top: 5,
         });
     }
 }
