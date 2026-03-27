@@ -74,7 +74,7 @@ body.addEventListener("click", (e) => {
 
         // so the goose does not spawn far off the screen if goose image
         // is not visable
-        if (gooseSpawnY < 0) { gooseSpawnY = canvas.height / 3; };
+        if ((gooseSpawnY < 0) || (gooseSpawnY > canvas.height - gooseHeight/2)) { gooseSpawnY = canvas.height / 3;};
 
         character.x = gooseSpawnX;
         character.y = gooseSpawnY;
@@ -328,6 +328,67 @@ addEventListener("keyup", (e) => {
             keys.a = false;
             break;
         case "d":
+            keys.d = false;
+            break;
+    }
+});
+
+//--------------BUTTONS FOR MOVEMENT ON MOBILE--------------------------------------//
+addEventListener("touchstart", (e) => {
+    //trying to grab elements true
+    if (e.target.className == "bx bx-hand" || e.target.className == "mobile-input grab") {
+        keys.grab = true;
+
+        //if already grabbed element, drop it
+        grabbedElements.forEach(element => {
+            console.log(element);
+            let posArray = targetElementsXY.get(element);
+            posArray[2] = 0;
+        });
+        grabbedElements = [];
+    }
+
+    switch(e.target.className) {
+        case "bx bx-caret-up":
+        case "mobile-input up":
+            keys.w = true;
+            break;
+        case "bx bx-caret-down":
+        case "mobile-input down":
+            keys.s = true;
+            break;
+        case "bx bx-caret-left":
+        case "mobile-input left":
+            keys.a = true;
+            break;
+        case "bx bx-caret-right":
+        case "mobile-input right":
+            keys.d = true;
+            break;
+    }
+});
+
+addEventListener("touchend", (e) => {
+    if (e.target.className == "bx bx-hand" || e.target.className == "mobile-input grab") {
+        keys.grab = false;
+    }
+
+    switch(e.target.className) {
+        case "bx bx-caret-up":
+        case "mobile-input up":
+            console.log("up")
+            keys.w = false;
+            break;
+        case "bx bx-caret-down":
+        case "mobile-input down":
+            keys.s = false;
+            break;
+        case "bx bx-caret-left":
+        case "mobile-input left":
+            keys.a = false;
+            break;
+        case "bx bx-caret-right":
+        case "mobile-input right":
             keys.d = false;
             break;
     }

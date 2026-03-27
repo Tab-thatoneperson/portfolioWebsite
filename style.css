@@ -56,6 +56,11 @@ body.dark{
     --popupText: white;
     --gooseFilter: 1;
 }
+body,
+html{
+    max-width: 100%;
+    overflow-x: hidden;
+}
 body{
     padding: 0;
     margin: 0;
@@ -67,8 +72,6 @@ body{
     /* background-color: var(--bodyColour); */
     font-family: Arial, Helvetica, sans-serif;
     /* position: relative; */
-    max-width: 100%;
-    overflow-x: hidden;
 }
 *{
     box-sizing: border-box;
@@ -777,7 +780,7 @@ div.email > span:nth-child(2) {
 
     align-items: center;
     justify-content: center;
-    z-index: 106;
+    z-index: 120;
 }
 .instruction-content{
     background-color: var(--popupBackground);
@@ -818,6 +821,12 @@ div.email > span:nth-child(2) {
     border-radius: 25px;
     margin: 10px;
 }
+/*----------------------- MOBILE CONTROLS---------------------------------*/
+.mobile-controls,
+.grab{
+    display: none;
+}
+    
 /*----------------------- BREAKPOINTS---------------------------------*/
 @media(max-width: 1170px){
     .navBar .navLinks{
@@ -958,6 +967,75 @@ div.email > span:nth-child(2) {
 
     .instruction-keys{
         padding: 0px 20%;
+    }
+}
+
+@media (max-width: 450px) or ((hover: none) and (pointer: coarse)) {
+    .navLogo{
+        padding-left: 10vw;
+        padding-right: 5vw;
+    }
+    /*----------------------- MOBILE CONTROLS---------------------------------*/
+    .mobile-controls{
+        display: inline;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 60px);
+        grid-template-rows: repeat(2, 60px);
+        gap: 5px;
+        grid-template-areas: 
+        ". up ."
+        "left down right";
+        z-index: 130;
+        margin: 10px;
+    }
+    .grab{
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 60px;
+        height: 60px;
+        z-index: 130;
+        margin: 10px;
+    }
+    .mobile-input{
+        background-color: var(--nav);
+        border-radius: 20%;
+        border: 3px solid var(--text);
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+    }
+    .mobile-input i,
+    .mobile-controls-grab i{
+        color: var(--navText);
+        font-size: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .mobile-input:active{
+        background-color: var(--buttonHover);
+    }
+    .mobile-input:active i{
+        color: var(--invertText)
+    }
+
+    .up{
+        grid-area: up;
+    }
+    .grab{
+        grid-area: grab;
+    }
+    .left{
+        grid-area: left;
+    }
+    .right{
+        grid-area: right;
+    }
+    .down{
+        grid-area: down;
     }
 }
 
