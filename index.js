@@ -4,6 +4,8 @@ const body = document.querySelector("body"),
       modeToggle = document.querySelector(".darkLight"),
       gooseToggle = document.querySelector(".gooseSwitch"),
       gooseInfo = document.querySelector(".goose-instructions"),
+      grabIcon = document.querySelector(".grab"),
+      moveIcons = document.querySelector(".mobile-controls"),
       infoToggle = document.querySelector(".infoCircle"),
       sideBarOpen = document.querySelector(".sideBarOpen"),
       sideBarClose = document.querySelector(".sideBarClose");
@@ -29,6 +31,8 @@ const body = document.querySelector("body"),
         gooseToggle.classList.toggle("active");
         canvas.classList.toggle("show");
         infoToggle.classList.toggle("active");
+        grabIcon.classList.toggle("active");
+        moveIcons.classList.toggle("active");
         //open or close info section if goose is not active
         
         if(gooseToggle.classList.contains("active")){

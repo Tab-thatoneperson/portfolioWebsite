@@ -939,7 +939,7 @@ div.email > span:nth-child(2) {
         pointer-events: none; 
     }
     /*----------------------- MOBILE CONTROLS---------------------------------*/
-    .mobile-controls{
+    .mobile-controls.active{
         display: inline;
         position: fixed;
         bottom: 0;
@@ -954,7 +954,7 @@ div.email > span:nth-child(2) {
         z-index: 130;
         margin: 30px;
     }
-    .grab{
+    .grab.active{
         position: fixed;
         bottom: 0;
         right: 0;
