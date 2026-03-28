@@ -767,7 +767,7 @@ div.email > span:nth-child(2) {
 }
 /*----------------------- MOBILE CONTROLS---------------------------------*/
 .mobile-controls,
-.grab{
+.mobile-controls-grab{
     display: none;
 }
     
@@ -954,8 +954,9 @@ div.email > span:nth-child(2) {
         z-index: 130;
         margin: 30px;
     }
-    .grab.active{
+    .mobile-controls-grab.active{
         position: fixed;
+        display: grid;
         bottom: 0;
         right: 0;
         width: 60px;
@@ -988,7 +989,7 @@ div.email > span:nth-child(2) {
     .up{
         grid-area: up;
     }
-    .grab{
+    .grab.active{
         grid-area: grab;
     }
     .left{
