@@ -12,6 +12,10 @@ But be careful...the goose does not seem to like nice layouts :(\
 Move around with **W A S D** and have fun causing chaos!\
 Use **E** to grab website elements and place them wherever your heart desires.\
 \
+Awww man, I'm on my phone - does that mean I cannot control the goose?\
+No! Mobile viewers can now enjoy chaos via interactive buttons on the bottom of the screen.\
+Press ^ v < or > to move and the hand icon to grab :)\
+\
 Cause too much chaos? (no such thing) Press the 'X' in nav bar to banish the goose and restore order.
 
 ## Technology used
@@ -25,11 +29,12 @@ Cause too much chaos? (no such thing) Press the 'X' in nav bar to banish the goo
 - EmailJS
 - ScrollReveal.js
 
-## Acknowledgements
+## Inspirations
 Chaotic goose inspired by
 - Untitled Goose Game (House House)
 - Desktop Goose (samperson)
-\
+
+## Acknowledgements
 Tutorials referenced during development
 - The Normie Programmer [character movement on a canvas for html and javascript](https://www.youtube.com/watch?v=ZpZLmpKa2zw)
 - Bedimcode: [overall website design and responsiveness](https://www.youtube.com/watch?v=hsHZXjQQFuQ&t=5520s)
