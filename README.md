@@ -26,6 +26,10 @@ Cause too much chaos? (no such thing) Press the 'X' in nav bar to banish the goo
 - ScrollReveal.js
 
 ## Acknowledgements
+Chaotic goose inspired by
+- Untitled Goose Game (House House)
+- Desktop Goose (samperson)
+\
 Tutorials referenced during development
 - The Normie Programmer [character movement on a canvas for html and javascript](https://www.youtube.com/watch?v=ZpZLmpKa2zw)
 - Bedimcode: [overall website design and responsiveness](https://www.youtube.com/watch?v=hsHZXjQQFuQ&t=5520s)

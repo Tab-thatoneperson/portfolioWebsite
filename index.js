@@ -184,7 +184,6 @@ function updateCharacter() {
 
     // character moving 
     if (keys.w && (character.y > character.speed)) {
-        // console.log(character.y)
         character.y -= character.speed;
         character.direction = "walkUp";
         characterImage.src = "goose_front.png";
@@ -208,14 +207,14 @@ function updateCharacter() {
         gooseWidth = gooseSideWidth;
         character.moving = true;
         character.verticalMove = false;
-    } else if (keys.d && (character.x + scaledWidth < canvas.width + character.speed)) {
-        character.x += character.speed;
+    } else if (keys.d) {  
         character.direction = "walkRight";
         characterImage.src = "goose_side.png";
         gooseHeight = gooseSideHeight;
         gooseWidth = gooseSideWidth;
         character.moving = true;
         character.verticalMove = false;
+        if (character.x + (gooseFrontWidth * scale) < canvas.width + character.speed) { character.x += character.speed; }
     } else {
         character.direction = "idle";
         characterImage.src = "goose_front.png";
@@ -280,17 +279,20 @@ addEventListener("keydown", (e) => {
         keys.shift = true;
     }
 
-    //trying to grab elements true
-    if (e.key.toLowerCase() == "q" || e.key.toLowerCase() == "e") {
-        keys.grab = true;
-
-        //if already grabbed element, drop it
-        grabbedElements.forEach(element => {
-            console.log(element);
-            let posArray = targetElementsXY.get(element);
-            posArray[2] = 0;
-        });
-        grabbedElements = [];
+    //trying to grab or drop elements 
+    if (e.key.toLowerCase() == "e") {
+        //already grabbed element = drop
+        if (grabbedElements.length > 0){
+            //if already grabbed element, drop it
+            grabbedElements.forEach(element => {
+                let posArray = targetElementsXY.get(element);
+                posArray[2] = 0;
+            });
+            grabbedElements = [];
+        //grab element
+        } else {
+            keys.grab = true;
+        }        
     }
 
     switch(e.key.toLowerCase()) {
@@ -313,8 +315,9 @@ addEventListener("keyup", (e) => {
     if (e.key == 'Shift'){
         keys.shift = false;
     }
-    if (e.key.toLowerCase() == "q" || e.key.toLowerCase() == "e") {
-        keys.grab = false;
+
+    if (e.key.toLowerCase() == "e") {
+        keys.grab = false;       
     }
 
     switch(e.key.toLowerCase()) {
@@ -335,17 +338,20 @@ addEventListener("keyup", (e) => {
 
 //--------------BUTTONS FOR MOVEMENT ON MOBILE--------------------------------------//
 addEventListener("touchstart", (e) => {
-    //trying to grab elements true
+    //trying to grab or drop elements 
     if (e.target.className == "bx bx-hand" || e.target.className == "mobile-input grab") {
-        keys.grab = true;
-
-        //if already grabbed element, drop it
-        grabbedElements.forEach(element => {
-            console.log(element);
-            let posArray = targetElementsXY.get(element);
-            posArray[2] = 0;
-        });
-        grabbedElements = [];
+        //already grabbed element = drop
+        if (grabbedElements.length > 0){
+            //if already grabbed element, drop it
+            grabbedElements.forEach(element => {
+                let posArray = targetElementsXY.get(element);
+                posArray[2] = 0;
+            });
+            grabbedElements = [];
+        //grab element
+        } else {
+            keys.grab = true;
+        }        
     }
 
     switch(e.target.className) {
@@ -376,7 +382,6 @@ addEventListener("touchend", (e) => {
     switch(e.target.className) {
         case "bx bx-caret-up":
         case "mobile-input up":
-            console.log("up")
             keys.w = false;
             break;
         case "bx bx-caret-down":
@@ -398,11 +403,10 @@ addEventListener("touchend", (e) => {
 const targetElements = document.querySelectorAll('.target');
 const targetElementsXY = new Map();
 for (let element of targetElements) {
-                                //x, y, grabbed
+                                //x, y
     targetElementsXY.set(element, [0, 0]);
 }
 let grabbedElements = [];
-// console.log(targetElementsXY);
 
 function checkCollision() {
     const moveableElements = document.querySelectorAll('.target');
@@ -419,8 +423,8 @@ function checkIntersection(goose, element, pos) {
     let posArray = targetElementsXY.get(element);
     const grabRoom = 5; //ensure user can pick up element before pushing it
 
+    // if the user wants to grab - grab any elements around the gooses head
     if (goose.grab) {
-        
         if (goose.y <= r2.bottom + allowance &&
             goose.y >= r2.top - allowance &&
             goose.x <= r2.right + allowance &&
@@ -430,15 +434,11 @@ function checkIntersection(goose, element, pos) {
             }
     }
     
+    //for any grabbed elements - move them with the goose's movements
     if (posArray[2] == 1) {
         if (goose.direction == "walkDown"){
             posArray[0] = posArray[0] - (r2.right - (goose.x + scaledWidth/2)) + (r2.right - r2.left)/2;
             posArray[1] = posArray[1] + (goose.y + scaledHeight/6 - r2.bottom + (r2.bottom - r2.top));
-            element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
-        }
-        else if (goose.direction == "walkUp"){
-            posArray[0] = posArray[0] - (r2.right - (goose.x + scaledWidth/2)) + (r2.right - r2.left)/2;
-            posArray[1] = posArray[1] + (goose.y - r2.bottom + scaledHeight/6);
             element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
         }
         else if (goose.direction == "walkLeft"){
@@ -451,7 +451,13 @@ function checkIntersection(goose, element, pos) {
             posArray[1] = posArray[1] + (goose.y + scaledHeight/6 - r2.bottom + (r2.bottom - r2.top));
             element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
         }
+        else {
+            posArray[0] = posArray[0] - (r2.right - (goose.x + scaledWidth/2)) + (r2.right - r2.left)/2;
+            posArray[1] = posArray[1] + (goose.y - r2.bottom + scaledHeight/6);
+            element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
+        }
     }
+    //if not a grabbed element but colliding with goose - push 
     else {
         // y axis
         if (goose.verticalMove) {
@@ -461,7 +467,6 @@ function checkIntersection(goose, element, pos) {
                 goose.x <= r2.right - grabRoom &&
                 (goose.x + scaledWidth) >= r2.left + grabRoom &&
                 goose.direction == "walkUp") { 
-                    console.log('vertical - bottom');
                     let moveY = (r2.bottom - goose.y);
                     let posArray = targetElementsXY.get(element);
                     posArray[1] = posArray[1] - moveY;
@@ -473,10 +478,8 @@ function checkIntersection(goose, element, pos) {
                 goose.x <= r2.right - grabRoom &&
                 (goose.x + scaledWidth) >= r2.left + grabRoom &&
                 goose.direction == "walkDown") {
-                    console.log('vertical - top');
                     let posArray = targetElementsXY.get(element);
                     let moveY = (goose.y + scaledHeight) - r2.top;
-                    console.log(moveY);
                     posArray[1] = posArray[1] + moveY;
                     element.style.transform = `translate(${posArray[0]}px, ${posArray[1]}px)`;
                 };
@@ -489,7 +492,6 @@ function checkIntersection(goose, element, pos) {
                 goose.y + scaledHeight >= r2.top + grabRoom &&
                 goose.y <= r2.bottom - grabRoom &&
                 goose.direction == "walkLeft") {
-                    console.log('horizontal - left');
                     let moveX = (r2.right - goose.x);
                     let posArray = targetElementsXY.get(element);
                     posArray[0] = posArray[0] - moveX;
@@ -501,7 +503,6 @@ function checkIntersection(goose, element, pos) {
                 (goose.y + scaledHeight) >= r2.top + grabRoom &&
                 goose.y <= r2.bottom - grabRoom &&
                 goose.direction == "walkRight") { 
-                    console.log('horizontal - right');
                     let posArray = targetElementsXY.get(element); 
                     let moveX = (goose.x + scaledWidth) - r2.left;
                     posArray[0] = posArray[0] + moveX;
@@ -511,6 +512,7 @@ function checkIntersection(goose, element, pos) {
     }   
 };
 
+//scroll the screen if the goose reaches the top or bottom
 function checkScroll(){
     if (character.y < 70) {
         window.scrollBy({
